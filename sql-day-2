@@ -35,3 +35,15 @@ email_id varchar(30)
 
 -- Drop table 
 drop table if exists students;
+
+
+-- step:- 2
+create table if not exists my_file.students(
+id int primary key,
+name varchar(30),
+age varchar(30),
+gender varchar(30),
+address varchar(30),
+phone varchar(30),
+email_id varchar(30)
+);
