@@ -47,3 +47,18 @@ address varchar(30),
 phone varchar(30),
 email_id varchar(30)
 );
+
+-- -- fetch the records:-
+
+select * from students;  -- * ( astrick ) all columns 
+
+-- fetch table data form specific database table
+select * from my_db.students;
+
+-- specific column read 
+select name, address , phone ,email from students;
+
+use sql_course;
+select * from sql_course.medical_costs;
+
+select BMI , Children , Smoker, Region,`Medical Cost` from sql_course.medical_costs;
