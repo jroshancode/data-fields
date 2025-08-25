@@ -1,0 +1,72 @@
+
+use classroom;
+show tables;
+
+select * from students;
+
+describe students;
+
+insert into students(_id, name,age,gender,address,phone,email) 
+values(1,'jroshan',18'male','xyz','1234567890','abc@gmail.com'),
+(2,'Nishant',18,'male','pqr','0987653421','pqr@gmail.com'),
+(3,'Aditya'18,'male','','1357907531','lmn@gmail.com');
+
+insert into students(name,gender,address,phone,email) 
+values('jroshan','male','xyz','1234567890','abc@gmail.com'),
+('Nishant','male','pqr','0987653421','pqr@gmail.com'),
+('Aditya','male','','1357907531','lmn@gmail.com');
+
+
+INSERT INTO students(name, age, gender, address, phone, email)
+VALUES ('C', 20, 'male', 'LMN', '1234567802', 'c@gmail.com'),
+('D', 22, 'female', 'ABC', '1234567803', 'd@gmail.com'),
+('E', 21, 'male', 'DEF', '1234567804', 'e@gmail.com'),
+('F', 23, 'female', 'GHI', '1234567805', 'f@gmail.com'),
+('G', 24, 'male', 'JKL', '1234567806', 'g@gmail.com'),
+('H', 25, 'female', 'MNO', '1234567807', 'h@gmail.com'),
+('I', 26, 'male', 'STU', '1234567808', 'i@gmail.com'),
+('J', 27, 'female', 'VWX', '1234567809', 'j@gmail.com'),
+('K', 28, 'male', 'YZA', '1234567810', 'k@gmail.com'),
+('L', 29, 'female', 'BCD', '1234567811', 'l@gmail.com'),
+('M', 30, 'male', 'EFG', '1234567812', 'm@gmail.com'),
+('N', 31, 'female', 'HIJ', '1234567813', 'n@gmail.com'),
+('O', 32, 'male', 'KLM', '1234567814', 'o@gmail.com');
+
+
+
+CREATE TABLE Orders (
+    OrderID INTEGER PRIMARY KEY,
+    OrderDate DATE,
+    OrderTime TIME,
+    CreatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO Orders (OrderID, OrderDate, OrderTime) VALUES
+(1,  '2025-08-01', '08:00:00'),
+(2,  '2025-08-02', '09:15:00'),
+(3,  '2025-08-03', '10:30:00'),
+(4,  '2025-08-04', '11:45:00'),
+(5,  '2025-08-05', '13:00:00'),
+(6,  '2025-08-06', '14:15:00'),
+(7,  '2025-08-07', '15:30:00'),
+(8,  '2025-08-08', '16:45:00'),
+(9,  '2025-08-09', '18:00:00'),
+(10, '2025-08-10', '19:15:00'),
+(11, '2025-08-11', '08:30:00'),
+(12, '2025-08-12', '09:45:00'),
+(13, '2025-08-13', '11:00:00'),
+(14, '2025-08-14', '12:15:00'),
+(15, '2025-08-15', '13:30:00'),
+(16, '2025-08-16', '14:45:00'),
+(17, '2025-08-17', '16:00:00'),
+(18, '2025-08-18', '17:15:00'),
+(19, '2025-08-19', '18:30:00'),
+(20, '2025-08-20', '19:45:00');
+
+show tables;
+
+select * from students;
+
+-- read specific column 
+select gender,address,phone,email from students;
+
