@@ -1,0 +1,101 @@
+#2025 - 08 - 26 
+
+-- load database 
+use classroom;
+
+-- fetch the records:-
+
+select * from students;
+select * from my_db.employee_data;
+
+select Supervisor,Email from my_db.employee_data;
+
+-- Delete all information or tuples of records form database table at a time but table strucute will be saved.
+truncate students;
+
+insert into students(_id,name,age,gender,address,phone,email)
+values(101,'A',18,'female','XYZ','123456789','abc@gmail.com'),
+(102,'B',19,'female','PQR','123456780','pqr@gmail.com');
+
+INSERT INTO students(_id, name, age, gender, address, phone, email)
+VALUES (103, 'C', 20, 'male', 'LMN', '1234567802', 'c@gmail.com'),
+(104, 'D', 22, 'female', 'ABC', '1234567803', 'd@gmail.com'),
+(105, 'E', 21, 'male', 'DEF', '1234567804', 'e@gmail.com'),
+(106, 'F', 23, 'female', 'GHI', '1234567805', 'f@gmail.com'),
+(107, 'G', 24, 'male', 'JKL', '1234567806', 'g@gmail.com'),
+(108, 'H', 25, 'female', 'MNO', '1234567807', 'h@gmail.com'),
+(109, 'I', 26, 'male', 'STU', '1234567808', 'i@gmail.com'),
+(110, 'J', 27, 'female', 'VWX', '1234567809', 'j@gmail.com'),
+(111, 'K', 28, 'male', 'YZA', '1234567810', 'k@gmail.com'),
+(112, 'L', 29, 'female', 'BCD', '1234567811', 'l@gmail.com'),
+(113, 'M', 30, 'male', 'EFG', '1234567812', 'm@gmail.com'),
+(114, 'N', 31, 'female', 'HIJ', '1234567813', 'n@gmail.com'),
+(115, 'O', 32, 'male', 'KLM', '1234567814', 'o@gmail.com');
+
+
+--
+
+
+describe students;
+
+
+Keys and Constainsts:- 
+1. Not Null   ( Never store not nulls)
+
+2. Unique   ( Always store unique but may or not null values)
+
+3. Primary Key  ( Always store unique or never null values ) Unique + not null 
+
+4. checks    ( [Male, Female ,Other])  or ( age > 18 ) 
+
+5. Defatult  ( False ) eg.. active  users 
+Salary   ( base salry by defalutl 10000)
+
+  
+#Maintaining a User Tracking Table:-
+
+CREATE TABLE user_activity (
+  id int PRIMARY KEY auto_increment,
+  user_id INT NOT NULL,
+  action VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  update_at datetime default current_timestamp
+);
+
+describe user_activity;
+
+insert into user_activity(user_id,action,created_at)
+values(101,"yes",'2025-08-26 4:04:00');
+
+insert into user_activity(user_id,action,created_at)
+values(102,null,'2025-08-26 4:04:00');
+
+select * from user_activity;
+
+drop table students;
+
+create table if not exists students(
+id int primary key,
+name varchar(30),
+age varchar(30) check (age>18),
+gender varchar(30),
+address varchar(30) check (address in ('Noida',"Delhi","Faridabad")),
+phone varchar(30),
+email_id varchar(30)
+);
+
+insert into students(id,name,age,gender,address,phone,email_id)
+values(101,'A',19,'female','Delhi','123456789','abc@gmail.com');
+
+insert into students(id,name,age,gender,address,phone,email_id)
+values(102,'B',19,'female','Mumbai','123456780','pqr@gmail.com');
+
+
+16:11:56	insert into students(id,name,age,gender,address,phone,email_id) 
+values(101,'A',17,'female','XYZ','123456789','abc@gmail.com')	
+Error Code: 3819. Check constraint 'students_chk_1' is violated.	0.000 sec
+
+
+
+
+
