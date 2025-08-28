@@ -1,0 +1,74 @@
+#2025 - 08 - 28 
+
+-- load database 
+use classroom;
+
+-- 
+show tables;
+
+select * from orders;
+
+select * from students;
+
+select * from user_activity;
+
+select * from  sql_course.stu_perfomance;
+
+-- order by ( ascending or descending ) and Limit 
+
+-- Lowest score 
+select * from sql_course.stu_perfomance order by Previous_Scores;
+
+select * from sql_course.stu_perfomance order by Previous_Scores asc;
+
+--  biggest  scores
+
+select * from sql_course.stu_perfomance order by Previous_Scores desc;
+
+
+-- total number of records  ( It does't ignoure null value) 
+select count(*) from sql_course.stu_perfomance;
+
+-- Find Highest orders date records 
+select * from orders order by OrderDate desc;
+
+select * from orders order by OrderId desc;
+
+select count(*) from orders; -- 
+
+-- when you will be total number of records for specific column 
+-- then, it is igoure null value.
+select count(Orderdate) from orders;
+
+-- Fetch recods as unique or distinct 
+
+select * from orders;
+
+select distinct * from orders;
+
+-- for specific column 
+select distinct OrderDate from Orders;
+
+select distinct CreatedAt from Orders;
+
+
+select * from sql_course.stu_perfomance;
+
+
+select distinct * from sql_course.stu_perfomance;
+
+select distinct Hours_Studied from sql_course.stu_perfomance order by Hours_Studied desc;
+
+-- limit 
+
+select distinct * from sql_course.stu_perfomance limit 10;
+
+-- Fetch top 10 lowest previosu score of students
+select * from sql_course.stu_perfomance order by Previous_Scores asc limit 10;
+
+-- Highest  scores
+
+-- Fetch top 10 Highest previosu score of students
+select * from sql_course.stu_perfomance order by Previous_Scores desc limit 10;
+
+-- update Orders set Orderdate = null where OrderId = 17 ;
