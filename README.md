@@ -72,3 +72,66 @@ What is DDL? List some common DDL commands.
     DELETE: Deletes specific rows from a table. It can be rolled back and generates a log.
     TRUNCATE: Removes all rows from a table without logging each row, so it’s faster but cannot be rolled back.
     DROP: Deletes an entire database object (like a table), along with its structure. It is also non-reversible.
+
+
+#2025 - 08 - 30 
+
+create table business( <Br>
+id int primary key auto_increment, <Br>
+name varchar(20) not null, <Br>
+email varchar(50) not null, <Br>
+password varchar(20) not null, <Br>
+user_name varchar(20) not null unique, <Br>
+address varchar(40),  <Br>
+salary int not null);  <Br>
+
+insert into business(name,email,password,user_name,address,salary) <Br>
+values("ankit","ankit@gmail.com","a123","ank123","street road",15000), <Br>
+    ("Mohit",null,"b123","mus123","mumbai",20000), <Br>
+    ("raunak","c@gmail.com",null,"rau123","delhi",10000); <Br>
+    
+    
+insert into business(name,email,password,user_name,salary) <Br>
+values("A","a@gmail.com","a123","ank123",15000), <Br>
+    ("B","b@gmail.com",null,"mus123",20000), <Br>
+    ("C","c@gmail.com","c123","rau123",null); <Br>
+
+
+
+create table product( <Br>
+p_id int primary key auto_increment, <Br>
+name varchar(30) not null, <Br>
+category varchar(30) not null unique, <Br>
+quantity int, <Br>
+price float not null); <Br>
+
+insert into product(name,category,quantity,price) <Br>
+values("laptop","i3",2,80000), <Br>
+("headphones","boat",1,5000), <Br>
+("monitor","zebronics",3,25000), <Br>
+("LED",null,3,25000);  <Br>
+
+insert into product(name,category,quantity,price) <Br>
+values("laptop","i3",2,80000), <Br>
+("headphones","boat",1,5000),  <Br>
+("monitor","",3,25000);   <Br>
+ 
+
+-- Apply count and order by for read following these two tables data.  <Br>
+select * from product;  <Br>
+
+select  * from business; <Br>
+
+
+
+Create a table Students with: StudentID (integer, primary key) <br>
+Name (NOT NULL)  <br>
+Age (integer, must be >= 18)  <br>
+Email (must be unique)  <br>
+EnrolledDate (default current date)  <br>
+Create a table Employees with:  <br>
+EmpID (integer, primary key)  <br>
+Name (VARCHAR)  <br>
+ManagerID (integer, nullable)  <br>
+
+// Create table and insert any five records
