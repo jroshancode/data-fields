@@ -1,0 +1,27 @@
+# 2025 - 09 - 02
+
+-- rename table name and column name 
+rename table students to new_Name;
+
+select * from students;
+select * from new_Name;
+
+alter table new_Name rename abc;
+select * from abc;
+
+-- rename column name
+alter table abc rename column email_id to new_email;
+select * from abc;
+
+-- add column name 
+alter table abc add column new_col varchar(30) not null;
+alter table abc add column new_col1 varchar(30) not null default('yes');
+alter table abc add column create_at datetime;
+select * from abc;
+
+alter table abc drop column  new_col1;
+ 
+describe abc;
+
+alter table abc modify gender varchar(20);
+alter table abc modify address text;
