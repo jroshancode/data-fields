@@ -135,3 +135,23 @@ Name (VARCHAR)  <br>
 ManagerID (integer, nullable)  <br>
 
 // Create table and insert any five records
+
+# 2025 - 09 - 02 
+1. What is SQL or Why SQL ?
+2. What is different between Entity or attribute or tuples of records ?
+3. What is Database Schemas ?
+4. What is Server or Database ?
+5. What is a primary key, and why is it important?
+6. What is the difference between a primary key and a foreign key?
+7. Explain the difference between DELETE, TRUNCATE, and DROP.
+8. What are SQL constraints? Provide examples (e.g., NOT NULL, UNIQUE, CHECK).
+9. suppose Amazon has stored much information about customers, products, orders, categories or more in the database tables. Customers want to change their information, which Sql commands should you use to solve this problem?
+I have users or posts tables and I want a relationship between both tables and get information, so what is your approach, and how do you solve this problem ?
+
+# 2025 - 09 - 03 
+1. How to Create a Database abc if this database have already exists ?
+2. Write a command to display all database name ?
+3. Created Students table with id,s_name, age, email, phone and address attributes makes sure id is primary key and any columns have never store null values?
+4. What is output of the code ( select * from students )
+5. Explane this SQL query ( Truncate table ABC; )
+6. What is the advantages or disadvantages of using drop commands ?
