@@ -1,0 +1,70 @@
+# 2025 - 09 - 09 
+
+use classroom;
+
+show tables;
+
+-- fetch the medical costs 
+select * from medical_costs;
+
+select Gender,BMI, Smoker, `Medical Cost` from medical_costs;
+
+-- Operators 
+
+SQL operators are reserved words or characters used in SQL statements to perform operations like comparisons, calculations, and logical evaluations on data. 
+They are crucial for filtering, manipulating, and retrieving specific data sets from a database.
+# Operator:- 
+1. Arithmetical Operator ( + , - , * , / , % ) 
+2. Assignment Operator ( =, +=, -= , *= , /=, %=) 
+3. Comparision Operator ( < , > , != , <> , <= , >= ) 
+4. Logical Operator ( OR, AND , XOR , NOT ) 
+
+
+-- Arithmetical Operator ( + , - , * , / , % ) 
+
+select * from medical_costs;
+
+
+select * , (`Medical Cost` + 20 ) as incresed_pirce from medical_costs;
+
+-- alter table medical_costs drop column `MyUnknownColumn_[0]`;
+
+select *, ( `Medical Cost` - 20 ) as dis, 
+( BMI * 2 ) as multiply , ( BMI / 2 ) as divided , 
+( BMI %  10 ) as modular from medical_costs;
+
+
+-- from => join => where => group by => having => select => order by => limit => offset
+
+select * from medical_costs;
+
+select * ,`Medical Cost` + (`Medical Cost` * 5 ) / 100 , 
+`Medical Cost` -(`Medical Cost` * 5 ) / 100
+from medical_costs;
+
+select * ,`Medical Cost` + (`Medical Cost` * 0.05) as 5_percent
+from medical_costs;
+
+
+-- select 5 / 100
+
+select * from medical_costs;
+
+select * from medical_costs ;
+
+select distinct Region from medical_costs; 
+
+select * from medical_costs where region = "southeast";
+
+select * from medical_costs where children  = 1;
+
+-- Comparision Operator ( < , > , != , <> , <= , >= ) 
+select * from medical_costs where children !=0;
+select * from medical_costs where region!='northwest';
+
+select * from medical_costs where BMI >= 20 ;
+
+select * from medical_costs where BMI > 25;
+
+select * from medical_costs where BMI <20;
+select * from medical_costs where BMI <25;
