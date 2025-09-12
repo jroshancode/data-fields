@@ -1,4 +1,4 @@
-# 2025 - 08 - 14 
+# 2025 - 09 - 12
 use sql_course;
 
 select * from medical_costs;
