@@ -1,0 +1,45 @@
+use sql_course;
+
+select * from medical_costs;
+select * from product;
+select * from stu_perfomance;
+
+-- Fetch the records 
+select * from medical_costs
+where (Age >=18 and Age <=25) or Smoker ="yes";
+
+-- Number of records 
+select count(*) from medical_costs
+where (Age >=18 and Age <=25) or Smoker ="yes";
+
+-- Fetch 
+select * from medical_costs 
+where Age between 18 and 25;
+
+-- count
+select  count(*) from medical_costs 
+where Age between 18 and 25;
+-- in 
+select * from medical_costs
+where Children = 1 or Children = 2 or Children = 3;
+
+select * from medical_costs
+where Children in(1,2,3);
+
+-- sex is male and children = 0, 2 , 5 or  Smoker is yes
+
+select * from medical_costs 
+where Sex="Male" and children in(0,2,5) or smoker ='Yes';
+
+-- is null or is not null 
+-- Only Only check for null value in a specific column 
+
+-- Fetch the medical reports where BMI is null or not null
+select * from medical_costs
+where BMI is null;
+
+select * from medical_costs where BMI is not null;
+
+-- fetch the all medical reports where smoker is not null
+selec * from medical_costs 
+where Smoker is not null;
