@@ -1,7 +1,6 @@
 use sql_course;
 
 select * from medical_costs;
-select * from product;
 select * from stu_perfomance;
 
 -- Fetch the records 
