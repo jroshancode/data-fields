@@ -1,0 +1,86 @@
+# 2025 - 08 - 14 
+use sql_course;
+
+select * from medical_costs;
+select * from product;
+select * from stu_perfomance;
+
+select * from product;
+
+-- Like and wild card 
+-- %% ( anything) 
+-- _ ( fixed ) 
+
+-- get all product which first letter is a, e, i , o ,u 
+select product_name from product 
+where product_name like "a%" or product_name like "e%"
+or product_name like "i%" or product_name like "o%"
+or product_name like "u%";
+
+-- get all product name which last letter is a , e , i , o , u 
+select product_name from product 
+where product_name like "%a" or product_name like "%e"
+or product_name like "%i" or product_name like "%o"
+or product_name like "%u";
+
+use my_db;
+select * from train;
+
+-- Get all Customer name from train table who's name last letter is a , e , i , o , u 
+select * from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+-- number of records 
+select count(*) from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+
+-- Get all Customer name from train table who's name first letter is a , e , i , o , u 
+select *  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- count number of unique records 
+
+select distinct count(*)  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- second , second last 
+select * from train;
+
+-- search anywhere in name column 
+select * from train 
+where `Customer Name` like "%a%";
+
+--  Custoemr name Second letter is a , e , i ,u , o 
+select * from train
+where `Customer Name` like "_a%" or `Customer Name` like "_e%"
+or `Customer Name` like "_i%" or `Customer Name` like "_o%"
+or `Customer Name` like "_u%";
+
+
+--  Custoemr name Second last letter is a , e , i ,u , o 
+select * from train
+where `Customer Name` like "%a_" or `Customer Name` like "%e_"
+or `Customer Name` like "%i_" or `Customer Name` like "%o_"
+or `Customer Name` like "%_u";
+
+
+-- Get all product name which start with aa , ee , ii ,oo ,uu
+select * from train 
+where `Product name` like "aa%" or `Product name` like "ee%"
+or `Product name` like "ii%" or `Product name` like "oo%" 
+or `Product name` like "uu%";
+
+-- Get unique city name form train 
+select distinct(City) from train;
+
+select count(distinct(City))  from train;
+
