@@ -1,0 +1,66 @@
+# 2025 - 09 - 11 
+
+-- AND ( both condition should be true) 
+TRUE and FALSE -> FALSE 
+FALSE and FALSE -> FALSE 
+TRUE and TRUE -> TRUE 
+False and True -> False
+
+-- OR  ( Atleast any one conditions should be true ) 
+True or False -> True 
+False or False -> False 
+False or True -> True 
+True or True -> True 
+
+-- XOR ( should be only one conditons true )
+True or False -> True 
+False or False -> False 
+False or True -> True 
+True or True -> False
+
+-- NOT 
+True -> False 
+false -> True
+
+
+
+-- between and in 
+
+select * from medical_costs;
+
+select * from medical_costs where Gender !='female' ;
+select * from medical_costs where Gender ='male';
+
+-- for multiple  or condition ( in or not in ) 
+select * from medical_costs where children in(2,5);
+
+select * from medical_costs where children not in(0,1);
+
+
+select * from medical_costs where Region not in('northeast','northwest');
+
+-- fetch the Medical reports for age more than 25 
+select * from medical_costs where Age > 25;
+
+
+-- fetch the Medical reports for age more than 25 and less than 30
+select * from medical_costs where Age > 25 and age <30;
+
+-- fetch the Medical reports for age more or equal to 25 and less than or equal 30
+select * from medical_costs where Age >= 25 and age <=30;
+
+-- between  ( use for filtring range value like age , date/time etc ) 
+select * from medical_costs where Age between 25 and 30;
+
+select * from medical_costs where age <=30;
+
+select * from medical_costs where not(age <=30);
+
+select * from medical_costs where Gender = 'female' or age in(100);
+
+select * from medical_costs where Gender = 'female' and age in(100);
+
+select * from medical_costs where Gender = 'male' and age in(100);
+
+select * from medical_costs where Gender = 'female' xor age in(100);
+-- 
