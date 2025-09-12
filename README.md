@@ -155,3 +155,9 @@ I have users or posts tables and I want a relationship between both tables and g
 4. What is output of the code ( select * from students )
 5. Explane this SQL query ( Truncate table ABC; )
 6. What is the advantages or disadvantages of using drop commands ?
+7. 
+
+# 2025 - 09 - 12 
+
+![Uploading image.png…]()
+
