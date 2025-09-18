@@ -39,7 +39,7 @@ VALUES (103, 'C', 20, 'male', 'LMN', '1234567802', 'c@gmail.com'),
 describe students;
 
 
-Keys and Constainsts:- 
+Keys and Constrainsts:- 
 1. Not Null   ( Never store not nulls)
 
 2. Unique   ( Always store unique but may or not null values)
@@ -48,8 +48,8 @@ Keys and Constainsts:-
 
 4. checks    ( [Male, Female ,Other])  or ( age > 18 ) 
 
-5. Defatult  ( False ) eg.. active  users 
-Salary   ( base salry by defalutl 10000)
+5. Default  ( False ) eg.. active  users 
+Salary   ( base salary by default 10000 )
 
   
 #Maintaining a User Tracking Table:-
