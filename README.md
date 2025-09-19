@@ -174,4 +174,8 @@ CHAR stores fixed-length strings, padding shorter values with spaces to reach th
 
 <img width="599" height="415" alt="image" src="https://github.com/user-attachments/assets/c77c7508-217e-4d24-b5ff-b619febb99ed" />
 
+![WhatsApp Image 2025-09-18 at 11 10 21](https://github.com/user-attachments/assets/2f50382f-9c04-4776-9920-ac66e4c68fc3)
+
+![WhatsApp Image 2025-09-18 at 11 10 21](https://github.com/user-attachments/assets/1f3243e9-1caf-4133-8731-fb1adcf598ff)
+
 
