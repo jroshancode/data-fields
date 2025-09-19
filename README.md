@@ -168,14 +168,15 @@ I have users or posts tables and I want a relationship between both tables and g
 # 2025 - 09 - 12 
 <img width="599" height="415" alt="image" src="https://github.com/user-attachments/assets/aa48f043-ea53-4278-a8b1-ce693ae94512" />
 
+![WhatsApp Image 2025-09-18 at 11 10 21](https://github.com/user-attachments/assets/2f50382f-9c04-4776-9920-ac66e4c68fc3)
+
+![WhatsApp Image 2025-09-18 at 11 39 24](https://github.com/user-attachments/assets/47618dcf-315d-4829-990c-5edbf3fabe42)
 
 # 2025 - 09 - 19 
 CHAR stores fixed-length strings, padding shorter values with spaces to reach the specified length, which can be faster for consistent-length data but wastes space. VARCHAR stores variable-length strings, only using the space for the actual characters plus some overhead for length information. Use CHAR for consistent data like state abbreviations and VARCHAR for variable data like names or addresses
 
 <img width="599" height="415" alt="image" src="https://github.com/user-attachments/assets/c77c7508-217e-4d24-b5ff-b619febb99ed" />
 
-![WhatsApp Image 2025-09-18 at 11 10 21](https://github.com/user-attachments/assets/2f50382f-9c04-4776-9920-ac66e4c68fc3)
 
-![WhatsApp Image 2025-09-18 at 11 10 21](https://github.com/user-attachments/assets/1f3243e9-1caf-4133-8731-fb1adcf598ff)
 
 
