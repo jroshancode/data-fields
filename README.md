@@ -172,5 +172,6 @@ I have users or posts tables and I want a relationship between both tables and g
 # 2025 - 09 - 19 
 CHAR stores fixed-length strings, padding shorter values with spaces to reach the specified length, which can be faster for consistent-length data but wastes space. VARCHAR stores variable-length strings, only using the space for the actual characters plus some overhead for length information. Use CHAR for consistent data like state abbreviations and VARCHAR for variable data like names or addresses
 
-<img width="1102" height="583" alt="image" src="https://github.com/user-attachments/assets/69e2e883-d749-4bcc-a98a-7dc0476adf6f" />
+<img width="599" height="415" alt="image" src="https://github.com/user-attachments/assets/c77c7508-217e-4d24-b5ff-b619febb99ed" />
+
 
