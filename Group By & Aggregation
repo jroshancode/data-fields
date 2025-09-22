@@ -84,7 +84,7 @@ id , name , price , quantity , category
 
 -- category 
 -- tech   -- 3 
--- Fashoion   -- 3
+-- Fashion   -- 2
 -- electricty  -- 1
 
 having count(*) >2
