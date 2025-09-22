@@ -89,26 +89,28 @@ id , name , price , quantity , category
 
 having count(*) >2
 
-use quiz_app
+Here's a step-by-step approach: 
+1. Identify your data source: This could be a spreadsheet, a database, or a list you have.
+2. Group by category: Use a tool or function to group your items by their corresponding category.
+3. Calculate the total price for each category: For each group (category), sum up the prices of all items within that category.
+4. Filter for categories with totals over 600: Apply a filter to keep only those categories where the calculated total price is greater than 600.
 
-select * from loan_data
+Category      |    Price <br>
+Electronics   |    300   <br>
+Electronics   |    400   <br>
+Clothing      |    150   <br>
+Clothing      |    200   <br>
+Home Goods    |    700   <br>
 
-select loan_amnt from loan_data;
+You would:
+Sum prices by category:
+Electronics: 300 + 400 = 700
+Clothing: 150 + 200 = 350
+Home Goods: 700
 
--- min 
-select min(loan_amnt) from loan_data;
-select loan_amnt from loan_data order by loan_amnt limit 1;
-
--- max
-select max(loan_amnt) from loan_data;
-select loan_amnt from loan_data order by loan_amnt desc limit 5;
-
--- sum
-select sum(loan_amnt) from loan_data;
-
--- avg 
--- max
-select avg(loan_amnt) from loan_data;
+Filter results:
+Electronics: (700 > 600)
+Home Goods: (700 > 600)
 
 
 -- product 
@@ -159,10 +161,24 @@ values (4,null,null,null,null)
 
 select * from loan_data
 
--- Truncate product_test
-truncate product_test
 
-select * from product_test
+select category , count(price), sum(price) , avg(price) 
+from product_test group by category; 
+
+-- find all category which total price is more than 600
+select category , count(price), sum(price) , avg(price) 
+from product_test group by category having sum(price) > 600;
+
+select * from medical_costs;
+select region , count(*), avg(`Medical Cost`) , min(`Medical Cost`) , max(`Medical Cost`) ,
+sum(`Medical Cost`) 
+from medical_costs group by region;
+
+-- find all region which are occuring or repeting more than 1950;
+select region , count(*), avg(`Medical Cost`) , min(`Medical Cost`) , max(`Medical Cost`) ,
+sum(`Medical Cost`) 
+from medical_costs group by region having count(*) > 1950;
+
 
 
 
