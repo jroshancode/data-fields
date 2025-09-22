@@ -1,0 +1,169 @@
+# 2025 - 09 - 20
+
+# -- Group by 
+In MySQL, aggregation refers to the process of performing calculations on a set of values (from multiple rows) and returning a single summary value. This is achieved using aggregate functions, which are often combined with the GROUP BY clause to organize data into groups before applying the aggregation.
+Common MySQL Aggregate Functions:
+
+  1. COUNT(): Counts the number of rows or non-NULL values in a column.
+     SELECT COUNT(*) FROM employees; -- Counts all rows
+     SELECT COUNT(DISTINCT department) FROM employees; -- Counts unique departments
+
+  2. SUM(): Calculates the sum of a numeric column.
+     SELECT SUM(salary) FROM employees;
+
+  3. AVG(): Calculates the average of a numeric column.
+    SELECT AVG(age) FROM employees;
+
+ 4. MIN(): Returns the minimum value in a column.
+    SELECT MIN(hire_date) FROM employees;
+
+5. MAX(): Returns the maximum value in a column.
+    SELECT MAX(salary) FROM employees;
+
+GROUP_CONCAT(): Concatenates values from a column into a single string, separated by a specified delimiter.
+SELECT GROUP_CONCAT(name SEPARATOR ', ') FROM employees WHERE department = 'Sales';
+
+-- Aggregations funcitons ( max , min ,sum ,count ,avg)
+
+-- Having 
+
+-- Group by 
+
+-- Distinct -> Handle duplicate value 
+
+
+# Using Aggregate Functions with GROUP BY:
+The GROUP BY clause is used to group rows that have the same values in specified columns into summary rows. Aggregate functions then operate on these groups.
+
+SELECT department, AVG(salary)
+FROM employees
+GROUP BY department; -- Calculates the average salary for each department
+
+
+# Filtering Aggregated Data with HAVING:
+While the WHERE clause filters individual rows before aggregation, the HAVING clause filters groups after aggregation.
+
+SELECT department, COUNT(employee_id) AS total_employees
+FROM employees
+GROUP BY department
+HAVING total_employees > 5; -- Shows departments with more than 5 employees
+
+-- let suppose 
+
+-- product 
+id , name , price , quantity , category 
+1    ABC    1200      2         tech 
+2    Pqr    800       1         Fashion 
+3    lam    2000      2         Fashion 
+4    xyz    1024      1         tech 
+5   mouse   299       1         tech 
+6  light    300       1         electricty 
+
+-- Aggregations funcitons ( max , min ,sum ,count ,avg)
+
+-- quantity 
+1   --> 4   , 1024 ( max ) ,  299  ( min  ) ,  2423 ( sum ) , 606 ( avg )
+2  -- > 2    < 2000( max) ,  1200 ( min )  , 3200 ( sum) , 1600( avg )
+
+-- sum of  total records / total numbers of records 
+-- 1200 + 2000 
+-- 3200 / 2 = 1600
+
+-- category 
+-- tech   -- 3 
+-- Fashoion   -- 3
+-- electricty  -- 1
+
+-- quantity , category 
+2         tech  ( 1 times )
+1         Fashion  (1 times  ) 
+2         Fashion ( 1 times )
+1         tech  (2 times times ) 
+1         electricty ( 1 times ) 
+
+
+-- category 
+-- tech   -- 3 
+-- Fashoion   -- 3
+-- electricty  -- 1
+
+having count(*) >2
+
+use quiz_app
+
+select * from loan_data
+
+select loan_amnt from loan_data;
+
+-- min 
+select min(loan_amnt) from loan_data;
+select loan_amnt from loan_data order by loan_amnt limit 1;
+
+-- max
+select max(loan_amnt) from loan_data;
+select loan_amnt from loan_data order by loan_amnt desc limit 5;
+
+-- sum
+select sum(loan_amnt) from loan_data;
+
+-- avg 
+-- max
+select avg(loan_amnt) from loan_data;
+
+
+-- product 
+id , name , price , quantity , category 
+1    ABC    1200      2         tech 
+2    Pqr    800       1         Fashion 
+3    lam    2000      2         Fashion 
+4    null    1024      1         tech 
+5   mouse   299       1         tech 
+6   null    300       1         electricty 
+null null   null      null       null
+
+-- count ( strtick )
+select count(*) from loan_data;
+-- select * from loan_data order by person_age desc
+-- Output : 6
+select count(name) from loan_data;
+-- Output : 4
+
+create table product_test(
+id int, 
+name varchar(30),
+price int ,
+quantity int,
+category varchar(30)
+)
+
+describe product_test
+
+-- Insert records 
+insert into product_test(id , name , price , quantity , category)
+values(1,null,1024,1,'tech'),
+(2,'mOuSe',299,1,'tech'),
+(null,null,null,null,null)
+
+select * from product_test
+
+-- count total numbers of records
+select count(*) from product_test
+
+-- total numbers of values
+select count(name) from product_test 
+-- 1
+select count(quantity) from product_test
+
+insert into product_test(id , name , price , quantity , category)
+values (4,null,null,null,null)
+
+select * from loan_data
+
+-- Truncate product_test
+truncate product_test
+
+select * from product_test
+
+
+
+-- from , where , group by , having , select , order by , limit , offset 
