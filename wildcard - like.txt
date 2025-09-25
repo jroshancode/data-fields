@@ -11,13 +11,13 @@ select * from product;
 -- %% ( anything) 
 -- _ ( fixed ) 
 
--- get all product which first letter is a, e, i , o ,u 
+-- Get all product name which start with first letter is a, e, i , o ,u 
 select product_name from product 
 where product_name like "a%" or product_name like "e%"
 or product_name like "i%" or product_name like "o%"
 or product_name like "u%";
 
--- get all product name which last letter is a , e , i , o , u 
+-- Get all product name which end with last letter is a , e , i , o , u 
 select product_name from product 
 where product_name like "%a" or product_name like "%e"
 or product_name like "%i" or product_name like "%o"
@@ -26,13 +26,14 @@ or product_name like "%u";
 use my_db;
 select * from train;
 
--- Get all Customer name from train table who's name last letter is a , e , i , o , u 
+-- Get all Customer name from train table  who's name last letter is a , e , i , o , u 
 select * from train 
 where `Customer Name` like "%a" or `Customer Name` like "%e"
 or `Customer Name` like "%i" or `Customer Name` like "%o"
 or `Customer Name` like "%u";
 
 -- number of records 
+-- count number of records to customer name end with a, e , i , o and u
 select count(*) from train 
 where `Customer Name` like "%a" or `Customer Name` like "%e"
 or `Customer Name` like "%i" or `Customer Name` like "%o"
@@ -59,7 +60,7 @@ select * from train;
 select * from train 
 where `Customer Name` like "%a%";
 
---  Custoemr name Second letter is a , e , i ,u , o 
+--  Customer's name Second letter end with  a , e , i ,u , o 
 select * from train
 where `Customer Name` like "_a%" or `Customer Name` like "_e%"
 or `Customer Name` like "_i%" or `Customer Name` like "_o%"
