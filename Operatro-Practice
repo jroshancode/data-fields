@@ -1,0 +1,73 @@
+#2025 - 09 - 26 
+
+use classroom;
+
+
+select * from medical_costs;
+
+-- fetch all medical reports but not for children 0 
+select * from medical_costs where children !=0;
+
+-- fetch all medical reports but not for gender is male 
+select * from medical_costs where gender !='male';
+select * from medical_costs where gender ='female';
+
+-- in 
+
+select * from medical_costs where region ='northwest' or region ='northeast'
+or region ='southwest';
+select * from medical_costs where region in('northwest','northeast','southwest');
+
+
+select * from medical_costs where region !='northwest' or region !='northeast'
+or region !='southwest';
+select * from medical_costs where region not in('northwest','northeast','southwest');
+
+
+-- between 
+select * from medical_costs where age between 18 and 30;
+select * from medical_costs where age >18 and age <30; --  18 and 30 is my exclusive value 
+
+select * from medical_costs where age >=18 and age <=30; --  18 and 30 is my inclusive value 
+
+
+-- is null or is not null
+
+-- like ( Searching like as Pattern ) 
+
+
+use my_db;
+
+select * from train;
+
+
+-- Get all product name which start with first letter is a, e, i , o ,u 
+select `Product Name` from train 
+where `Product Name` like "a%" or `Product Name` like "e%"
+or `Product Name` like "i%" or `Product Name` like "o%"
+or `Product Name` like "u%";
+
+-- fetch all product name which contain ,( comma ) 
+select `Product Name` from train where `Product Name` like "%,%";
+
+-- fetch all product name which contain _( under score ) 
+select `Product Name` from train where `Product Name` like "%_%";
+
+-- fetch all product name which contain -
+select `Product Name` from train where `Product Name` like "%-%";
+
+-- fetch all product name which contain /
+select count(*) from train where `Product Name` like "%/%"l
+
+-- Get all product name which last letter  end with is a , e , i , o , u 
+select `Product Name` from train 
+where `Product Name` like "%a" or `Product Name` like "%e"
+or `Product Name` like "%i" or `Product Name` like "%o"
+or `Product Name` like "%u";
+
+-- first third letter start with a , e , i , o, u
+
+select `Product Name` from train where `Product Name` like "__a%";
+
+-- first letter is a and last letter is e .
+select `Product Name` from train where `Product Name` like "a%e";
