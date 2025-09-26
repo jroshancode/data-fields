@@ -25,6 +25,10 @@ false -> True
 
 
 -- between and in 
+1. The SQL in operator is a logical operator used in the where clause to specific multiple values for a column. 
+It allows you to filter based on whether a columns' values mathces any within a specificed list or the result of a subquery.
+
+2. Between is a logical opertor used for filter record based on specific range . 
 
 select * from medical_costs;
 
