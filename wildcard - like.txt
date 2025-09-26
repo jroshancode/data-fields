@@ -60,14 +60,14 @@ select * from train;
 select * from train 
 where `Customer Name` like "%a%";
 
---  Customer's name Second letter end with  a , e , i ,u , o 
+--  Fetch all Customer's name with start second letter with  a , e , i ,u , o 
 select * from train
 where `Customer Name` like "_a%" or `Customer Name` like "_e%"
 or `Customer Name` like "_i%" or `Customer Name` like "_o%"
 or `Customer Name` like "_u%";
 
 
---  Custoemr name Second last letter is a , e , i ,u , o 
+--  Fetch all Customer's name who's Second last letter end with  a , e , i ,u , o 
 select * from train
 where `Customer Name` like "%a_" or `Customer Name` like "%e_"
 or `Customer Name` like "%i_" or `Customer Name` like "%o_"
