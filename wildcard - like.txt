@@ -9,7 +9,7 @@ select * from product;
 
 -- Like and wild card ( Sarching like as Pattern ) 
 -- %% ( anything) 
--- _ ( fixed ) 
+-- _ ( fixed )  number of letter 
 
 -- Get all product name which start with first letter is a, e, i , o ,u 
 select product_name from product 
