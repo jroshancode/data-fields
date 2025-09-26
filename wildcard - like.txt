@@ -60,7 +60,7 @@ select * from train;
 select * from train 
 where `Customer Name` like "%a%";
 
---  Fetch all Customer's name with start second letter with  a , e , i ,u , o 
+--  Fetch all Customer's name which contain second letter is  a , e , i ,u , o 
 select * from train
 where `Customer Name` like "_a%" or `Customer Name` like "_e%"
 or `Customer Name` like "_i%" or `Customer Name` like "_o%"
