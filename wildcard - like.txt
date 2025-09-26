@@ -17,7 +17,7 @@ where product_name like "a%" or product_name like "e%"
 or product_name like "i%" or product_name like "o%"
 or product_name like "u%";
 
--- Get all product name which end with last letter is a , e , i , o , u 
+-- Get all product name which last latter end with is a , e , i , o , u 
 select product_name from product 
 where product_name like "%a" or product_name like "%e"
 or product_name like "%i" or product_name like "%o"
