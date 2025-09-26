@@ -7,7 +7,7 @@ select * from stu_perfomance;
 
 select * from product;
 
--- Like and wild card 
+-- Like and wild card ( Sarching like as Pattern ) 
 -- %% ( anything) 
 -- _ ( fixed ) 
 
