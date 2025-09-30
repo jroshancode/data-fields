@@ -30,3 +30,114 @@ select distinct age from medical_costs order by age desc;
 select distinct age from medical_costs order by age desc limit 2;
 select distinct age from medical_costs order by age desc limit 1 offset 1;
 select distinct age from medical_costs order by age desc limit 1 offset 1;
+
+
+
+# 2025 - 09 - 30 
+
+use new_sql;
+
+select * from medical;
+select * from stu_performance;
+
+select distinct * from stu_performance limit 10;
+
+-- fetch top 10 highest and lowest medical charges 
+select * from medical order by `medical cost` desc limit 10;
+select * from medical order by `medical cost` limit 10;
+
+
+-- Fetch top 10 lowest previosu score of students
+select Hours_Studied, Attendance, Sleep_Hours, Previous_Scores,  
+Tutoring_Sessions, Physical_Activity, 
+Exam_Score from stu_performance order by Previous_Scores asc limit 10;
+
+-- Highest  scores
+
+-- Fetch top 10 Highest previosu score of students
+select Hours_Studied, Attendance, Sleep_Hours, Previous_Scores,  
+Tutoring_Sessions, Physical_Activity, 
+Exam_Score from stu_performance order by Previous_Scores desc limit 10;
+
+
+
+-- highest or lowest 
+
+select * from medical order by `medical Cost`;
+select * from medical order by `medical Cost` desc ;
+ 
+
+-- limit ( 
+select * from medical order by `medical Cost` ;
+select * from medical order by `medical Cost` limit 2;
+
+
+-- desc
+select * from medical order by `medical Cost` desc ;
+select * from medical order by `medical Cost` desc limit 2;
+
+-- nth highest or smallest
+
+select * from medical order by `medical Cost` desc ;
+select * from medical order by `medical Cost` desc limit 2;
+select * from medical order by `medical Cost` desc limit 2 offset 1;
+
+
+-- for second higheset or smallest age 
+select distinct age from medical order by age desc;
+
+select distinct age from medical order by age desc limit 2;
+select distinct age from medical order by age desc limit 1 offset 1;
+select distinct age from medical order by age desc limit 1 offset 1;
+
+select * from medical; 
+select * from medical offset 2;
+
+
+-- questions;
+select count(*) from medical;
+
+-- ?
+select distinct region from medical;
+
+select count(distinct region) from medical;
+
+-- alter 
+select * from users;
+
+-- rename table name and column name 
+rename table users to user;
+
+select * from users; -- Table 'new_sql.users' doesn't exist	0.000 sec
+select * from user;
+
+alter table user rename to users;
+
+select * from user; -- -- Table 'new_sql.user' doesn't exist	0.000 sec
+select * from users;
+
+alter table users rename column UserID to user_id;
+select * from users;
+
+-- add and drop column 
+alter table users add column phone int(10) unique ;
+
+alter table users add column new_col varchar(30) not null;
+
+alter table users add column new_col1 varchar(30) not null default('yes');
+alter table users add column create_at datetime default current_timestamp;
+
+alter table users drop column new_col;
+
+describe users;
+
+-- modify column size, data type and key constraints.
+alter table users modify name varchar(30) not null ;
+alter table users modify name varchar(30) not null default('abc') ;
+-- 11:50:30	alter table users modify name varchar(30) not null default('abc')	
+-- Error Code: 1265. Data truncated for column 'name' at row 4	0.046 sec
+
+alter table users modify name varchar(30);
+
+alter table users modify phone char(10);
+
