@@ -1,0 +1,275 @@
+# 2025 - 10 - 01 
+What is Realational Database ?
+A relational database is a type of database that stores data in one or more tables with predefined schemas.
+Table or rows or columms 
+
+## Product ( Entity )
+product_id , product_name, categories , Price, weight or quantity or etc.  
+
+               5
+
+##   Student ( Entity )
+student_id , Name , Age , Gender , Email_Id , Phone number , Course , Active  or deacitve 
+            M/F/O               +91 1234567896544              True or False
+
+
+## Course ( Entity )
+course_id , course_name , duration , course_fee , course_description , course_image , course_video
+
+
+-- Ralationships  ( Cardinalitiy ) 
+-- One to One  
+-- One to Many 
+-- Many to One 
+-- Many to Many 
+
+
+-- One to One 
+-- eg.. 1 Customer -> customer support 
+-- 1:1 session 
+
+-- Students ( id, name ,course ) 
+-- project ( id, stu_id, data, submited_date )
+
+
+1. One-to-One (1:1)
+Each row in Table A relates to one and only one row in Table B.
+
+📌 Example: Person ↔ Passport
+
+Person_ID	Name	Passport_ID	Passport_Number
+1	Alice	101	X1234567
+2	Bob	102	Y9876543
+3	Charlie	103	Z5432167
+4	Diana	104	A1357924
+5	Edward	105	B2468135
+
+
+2. One-to-Many (1:N)
+One row in Table A can relate to many rows in Table B.
+
+📌 Example: Customer → Orders  or Teacher have teech multiple course or Studenrt buy multiple coruse
+Customer_ID	Name	Order_ID	Product
+1	John	201	Laptop
+1	John	202	Mouse
+2	Alice	203	Monitor
+3	Michael	204	Keyboard
+3	Michael	205	USB Cable
+
+
+3. Many-to-One (N:1)
+Many rows in Table A relate to one row in Table B (inverse of 1:N).
+
+📌 Example: Employee → Department or ( Employee have one manager ) or  ( Many student have same course ) or ( Many customer buy same product ) 
+
+Employee_ID	Name	Dept_ID	Department
+101	Rahul	10	HR
+102	Sneha	20	IT
+103	Arjun	20	IT
+104	Kavya	10	HR
+105	Sameer	30	Finance
+
+
+4. Many-to-Many (M:N)
+Multiple rows in Table A relate to multiple rows in Table B using a junction table.
+
+📌 Example: Student ↔ Courses
+
+Student_ID	Name	Course_ID	Course_Name
+1	Aanya	301	Math
+1	Aanya	302	Physics
+2	Rohan	301	Math
+2	Rohan	303	Chemistry
+3	Meera	302	Physics
+
+-- Join ( on Columns ) 
+-- Combine two or more tables to get information 
+
+-- Like 
+-- Customer, Product and Orders
+-- Author , Books 
+-- teacher , Students 
+-- Course , Purchase , Students 
+
+-- Left join , Right Join , Full outer join ( left join union Right join ) 
+-- Inner join ( join ) and self join, cross join 
+
+
+📦 LEFT JOIN  🔹 LEFT JOIN (all from left + matches from right)
+🧱 All records from the left + matched from the right
+
+SELECT e.Emp_Name, d.Dept_Name
+FROM Employees e
+LEFT JOIN Departments d ON e.Dept_ID = d.Dept_ID;
+
+📌 Example: List all products, even those with no sales
+SELECT * FROM Products p 
+LEFT JOIN Orders o ON p.ProductID = o.ProductID;
+
+
+📩 RIGHT JOIN 🔹 RIGHT JOIN (all from right + matches from left)
+🧲 All from the right + matched from the left
+SELECT e.Emp_Name, d.Dept_Name
+FROM Employees e
+RIGHT JOIN Departments d ON e.Dept_ID = d.Dept_ID;
+
+🔍 INNER JOIN 🔹INNER JOIN (only matching records)
+🔗 Returns only matching records from both tables
+
+SELECT e.Emp_Name, d.Dept_Name
+FROM Employees e
+JOIN Departments d ON e.Dept_ID = d.Dept_ID;
+
+
+use classroom;
+
+-- relationships ( Departments => Employees ) or ( Employees => Departments ) 
+-- Employees Table
+CREATE TABLE Employees (
+    Emp_ID INT PRIMARY KEY,
+    Emp_Name VARCHAR(50),
+    Dept_ID INT
+);
+
+INSERT INTO Employees VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', NULL),
+(4, 'David', 104),
+(5, 'Eve', 105),
+(6,"Muskan",101),
+(7,"Nishant",102),
+(8,"Jroshan",104);
+
+-- Departments Table
+CREATE TABLE Departments (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50)
+);
+
+INSERT INTO Departments VALUES
+(101, 'HR'),
+(102, 'IT'),
+(103, 'Finance'),
+(106, 'Marketing');
+
+
+select * from Employees;
+select * from departments;
+
+
+# left join 
+select e.* , d.*
+from Employees as e
+left join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+-- for specific column
+
+select Emp_ID,Emp_Name,e.Dept_ID ,dept_name
+from Employees as e
+left join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+-- 16:17:33	select Emp_ID,Emp_Name,Dept_ID ,dept_name from Employees as e left join Departments as d  
+-- on d.Dept_ID = e.Dept_ID LIMIT 0, 10000	Error Code: 1052. 
+
+-- Column 'Dept_ID' in field list is ambiguous	0.000 sec
+
+
+
+select e.Emp_ID,e.Emp_Name,e.Dept_ID , d.dept_name
+from Employees as e
+left join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+
+-- find total number of employees for each department 
+
+select d.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+left join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by d.Dept_ID ;
+
+select e.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+left join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by e.Dept_ID;
+
+
+
+select * from Employees;
+select * from departments;
+
+## right join 
+select e.* , d.*
+from Employees as e
+right join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+
+select Emp_ID,Emp_Name,e.Dept_ID ,dept_name
+from Employees as e
+right join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+
+
+select e.Emp_ID,e.Emp_Name,e.Dept_ID , d.dept_name
+from Employees as e
+right join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+-- find total number of employees for each department 
+
+select d.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+right join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by d.Dept_ID ;
+
+select e.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+right join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by e.Dept_ID;
+
+
+select * from Employees;
+select * from departments;
+
+## Inner Join ( Exact Match ) 
+select e.* , d.*
+from Employees as e
+inner join departments as d
+on d.Dept_ID = e.Dept_ID;
+
+
+select Emp_ID,Emp_Name,e.Dept_ID ,dept_name
+from Employees as e
+join Departments as d 
+on d.Dept_ID = e.Dept_ID; 
+
+
+select e.Emp_ID,e.Emp_Name,e.Dept_ID , d.dept_name
+from Employees as e
+join Departments as d 
+on d.Dept_ID = e.Dept_ID;
+
+-- find total number of employees for each department 
+
+select d.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+ join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by d.Dept_ID ;
+
+select e.Dept_id, count(e.Emp_ID) as total
+from Employees as e
+inner join Departments as d 
+on d.Dept_ID = e.Dept_ID  
+group by e.Dept_ID;
+
+
