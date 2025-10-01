@@ -26,7 +26,7 @@ select * from sql_course.stu_perfomance order by Previous_Scores asc;
 select * from sql_course.stu_perfomance order by Previous_Scores desc;
 
 
--- total number of records  ( It does't ignoure null value) 
+-- Count total number of records  ( It does't ignoure null value) 
 select count(*) from sql_course.stu_perfomance;
 
 -- Find Highest orders date records 
@@ -36,11 +36,11 @@ select * from orders order by OrderId desc;
 
 select count(*) from orders; -- 
 
--- when you will be total number of records for specific column 
--- then, it is igoure null value.
+-- when you will be count total number of records for specific column 
+-- then, it is ignoure null value.
 select count(Orderdate) from orders;
 
--- Fetch recods as unique or distinct 
+-- Fetch records as unique or distinct ( remomve duplicate ) 
 
 select * from orders;
 
@@ -59,7 +59,7 @@ select distinct * from sql_course.stu_perfomance;
 
 select distinct Hours_Studied from sql_course.stu_perfomance order by Hours_Studied desc;
 
--- limit 
+-- limit  ( Only for need specific number of rows. ) 
 
 select distinct * from sql_course.stu_perfomance limit 10;
 
