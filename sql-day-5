@@ -14,7 +14,7 @@ select * from user_activity;
 
 select * from  sql_course.stu_perfomance;
 
--- order by ( ascending or descending ) and Limit 
+-- order by ( ascending or descending ) and Limit  Clause
 
 -- Lowest score 
 select * from sql_course.stu_perfomance order by Previous_Scores;
