@@ -1,0 +1,28 @@
+#2025 - 10 - 01 
+
+use new_sql;
+
+select * from medical;
+select * from stu_performance;
+
+# Where ( fileter number of rows for specific column ) 
+The WHERE clause in SQL is used to filter records that meet a specified condition or set of conditions. 
+It is a fundamental part of SELECT, UPDATE, and DELETE statements, allowing you to work with a subset of data rather than the entire table.
+
+-- count total number of records for age 18 
+select * from medical where age =18;
+
+select count(*) from medical where age =18;
+
+-- with order by 
+select * from medical where age =18 order by `medical cost` desc;
+
+-- for smoker is yes
+select * from medical where smoker ='yes';
+select count(*) from medical where smoker ='yes';
+select * from medical where smoker ='yes' order by `medical cost` desc;
+
+
+select * from my_db.train;
+
+
