@@ -269,10 +269,13 @@ CHAR stores fixed-length strings, padding shorter values with spaces to reach th
 # 2025 - 10 - 01 
 ## Joins 
 
+# Left Join
 <img width="1411" height="806" alt="left join" src="https://github.com/user-attachments/assets/6b61d1f6-9408-4ab9-81dd-6f386ed6b130" />
 
+# Right Join
 <img width="1376" height="771" alt="right join" src="https://github.com/user-attachments/assets/442a9230-458a-4753-994b-760596733302" />
 
+# Inner Join and Join
 <img width="1388" height="715" alt="inner join ( join )" src="https://github.com/user-attachments/assets/61c1ba7f-6d77-40dc-8232-0d005f8b2807" />
 
 
