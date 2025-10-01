@@ -1,5 +1,15 @@
 # 2025 - 09 - 02
 
+# Alter ( The ALTER TABLE command in SQL is a Data Definition Language  <br>
+(DDL) statement used to modify the structure of an existing table in a database. <br> 
+It allows for various structural changes without needing to drop and recreate the table <br>
+
+( With help of alter command to changed and modify table and table strucurtes like... 
+1. Adding a new column:
+2. Drop existing column:
+3. rename table and column name 
+4. Modifying an existing column ( data type, size , key constraints ) 
+
 -- rename table name and column name 
 rename table students to new_Name;
 
