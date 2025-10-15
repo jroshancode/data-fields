@@ -1,0 +1,407 @@
+#2025 - 10 - 15 
+
+use classroom;
+-- SQL script: create tables and insert 100 rows each for learning JOINs
+-- Run in MySQL / MariaDB as-is. For PostgreSQL change AUTO_INCREMENT to SERIAL / IDENTITY.
+
+-- 1) Create train table
+CREATE TABLE IF NOT EXISTS train (
+    train_id INT PRIMARY KEY,
+    train_name VARCHAR(100),
+    source VARCHAR(50),
+    destination VARCHAR(50),
+    capacity INT
+);
+
+-- 2) Create passenger table
+CREATE TABLE IF NOT EXISTS passenger (
+    passenger_id INT PRIMARY KEY,
+    passenger_name VARCHAR(100),
+    passenger_age INT,
+    passenger_gender ENUM('male','female','other'),
+    phone VARCHAR(20),
+    email VARCHAR(100)
+);
+
+-- 3) Create booking table (references train & passenger)
+CREATE TABLE IF NOT EXISTS booking (
+    booking_id INT PRIMARY KEY,
+    train_id INT,
+    passenger_id INT,
+    travel_date DATE,
+    seat_no VARCHAR(10),
+    fare DECIMAL(8,2),
+    status VARCHAR(20),
+    FOREIGN KEY (train_id) REFERENCES train(train_id),
+    FOREIGN KEY (passenger_id) REFERENCES passenger(passenger_id)
+);
+
+-- ---------------------------
+-- Insert 100 trains (train_id 1..100)
+-- ---------------------------
+INSERT INTO train (train_id, train_name, source, destination, capacity) VALUES
+(1,  'Express 1',  'New Delhi',     'Mumbai',       600),
+(2,  'Express 2',  'Kolkata',       'Bengaluru',    540),
+(3,  'Express 3',  'Chennai',       'Hyderabad',    500),
+(4,  'Express 4',  'Ahmedabad',     'Pune',         480),
+(5,  'Express 5',  'Lucknow',       'Jaipur',       420),
+(6,  'Express 6',  'Patna',         'Ranchi',       380),
+(7,  'Express 7',  'Bhopal',        'Indore',       350),
+(8,  'Express 8',  'Visakhapatnam', 'Vijayawada',   400),
+(9,  'Express 9',  'Surat',         'Vadodara',     320),
+(10, 'Express 10', 'Guwahati',      'Shillong',     200),
+(11, 'Express 11', 'Kochi',         'Trivandrum',   300),
+(12, 'Express 12', 'Kochi',         'Madurai',      280),
+(13, 'Express 13', 'Delhi',         'Agra',         250),
+(14, 'Express 14', 'Mumbai',        'Pune',         330),
+(15, 'Express 15', 'Bengaluru',     'Mysuru',       260),
+(16, 'Express 16', 'Nagpur',        'Raipur',       310),
+(17, 'Express 17', 'Amritsar',      'Jalandhar',    220),
+(18, 'Express 18', 'Varanasi',      'Allahabad',    240),
+(19, 'Express 19', 'Thiruvananthapuram','Kozhikode',240),
+(20, 'Express 20', 'Meerut',        'Noida',        200),
+(21, 'Express 21', 'Agartala',      'Kamalpur',     180),
+(22, 'Express 22', 'Dehradun',      'Haridwar',     200),
+(23, 'Express 23', 'Shimla',        'Kullu',        150),
+(24, 'Express 24', 'Jammu',         'Srinagar',     160),
+(25, 'Express 25', 'Gwalior',       'Jhansi',       210),
+(26, 'Express 26', 'Coimbatore',    'Salem',        230),
+(27, 'Express 27', 'Tirupati',      'Vellore',      190),
+(28, 'Express 28', 'Dhanbad',       'Jamshedpur',   220),
+(29, 'Express 29', 'Kolhapur',      'Satara',       170),
+(30, 'Express 30', 'Siliguri',      'Darjeeling',   140),
+(31, 'Express 31', 'Jodhpur',       'Bikaner',      200),
+(32, 'Express 32', 'Udaipur',       'Ajmer',        210),
+(33, 'Express 33', 'Raigarh',       'Bilaspur',     240),
+(34, 'Express 34', 'Bhatinda',      'Bathinda',     190),
+(35, 'Express 35', 'Raurkela',      'Sambalpur',    200),
+(36, 'Express 36', 'Nanded',        'Akola',        180),
+(37, 'Express 37', 'Jalgaon',       'Nashik',       210),
+(38, 'Express 38', 'Aurangabad',    'Latur',        160),
+(39, 'Express 39', 'Kalyan',        'Ulhasnagar',   200),
+(40, 'Express 40', 'Baroda',        'Anand',        190),
+(41, 'Express 41', 'Hubli',         'Belgaum',      220),
+(42, 'Express 42', 'Kurnool',       'Anantapur',    200),
+(43, 'Express 43', 'Gandhinagar',   'Surendranagar',170),
+(44, 'Express 44', 'Mathura',       'Vrindavan',    150),
+(45, 'Express 45', 'Kancheepuram',  'Chengalpattu',180),
+(46, 'Express 46', 'Sikar',         'Jhunjhunu',    160),
+(47, 'Express 47', 'Haldia',        'Kharagpur',    170),
+(48, 'Express 48', 'Ramagundam',    'Karimnagar',   190),
+(49, 'Express 49', 'Mangalore',     'Udupi',        180),
+(50, 'Express 50', 'Vellore',       'Kancheepuram',170),
+(51, 'Express 51', 'Pondicherry',   'Cuddalore',    160),
+(52, 'Express 52', 'Gaya',          'Buxar',        190),
+(53, 'Express 53', 'Palakkad',      'Tirur',        170),
+(54, 'Express 54', 'Durgapur',      'Asansol',      200),
+(55, 'Express 55', 'Bagalkot',      'Gadag',        150),
+(56, 'Express 56', 'Karwar',        'Sirsi',        140),
+(57, 'Express 57', 'Bareilly',      'Moradabad',    220),
+(58, 'Express 58', 'Muzaffarpur',   'Samastipur',   210),
+(59, 'Express 59', 'Ratlam',        'Mandsaur',     200),
+(60, 'Express 60', 'Shimoga',       'Chitradurga',  190),
+(61, 'Express 61', 'Palghat',       'Kottayam',     180),
+(62, 'Express 62', 'Sultanpur',     'Faizabad',     170),
+(63, 'Express 63', 'Hosur',         'Krishnagiri',  160),
+(64, 'Express 64', 'Tinsukia',      'Dibrugarh',    150),
+(65, 'Express 65', 'Betul',         'Chhindwara',   180),
+(66, 'Express 66', 'Korba',         'Ambikapur',    190),
+(67, 'Express 67', 'Imphal',        'Moreh',        140),
+(68, 'Express 68', 'Itanagar',      'Naharlagun',   130),
+(69, 'Express 69', 'Bilaspur',      'Raipur',       220),
+(70, 'Express 70', 'Hoshiarpur',    'Phagwara',     170),
+(71, 'Express 71', 'Kota',          'Bharatpur',    200),
+(72, 'Express 72', 'Sambalpur',     'Balangir',     160),
+(73, 'Express 73', 'Thrissur',      'Palakkad',     170),
+(74, 'Express 74', 'Muzzafarnagar', 'Shamli',       150),
+(75, 'Express 75', 'Palanpur',      'Mehsana',      140),
+(76, 'Express 76', 'Nanded',        'Parbhani',     130),
+(77, 'Express 77', 'Karaikudi',     'Sivaganga',    150),
+(78, 'Express 78', 'Dharwad',       'Hubli',        180),
+(79, 'Express 79', 'Bhagalpur',     'Katihar',      170),
+(80, 'Express 80', 'Farrukhabad',   'Kannauj',      160),
+(81, 'Express 81', 'Nainital',      'Haldwani',     140),
+(82, 'Express 82', 'Rishikesh',     'Dehradun',     150),
+(83, 'Express 83', 'Puri',          'Konark',       130),
+(84, 'Express 84', 'Kota',          'Udaipur',      200),
+(85, 'Express 85', 'Baramati',      'Daund',        160),
+(86, 'Express 86', 'Bettiah',       'Motihari',     140),
+(87, 'Express 87', 'Haridwar',      'Rishikesh',    180),
+(88, 'Express 88', 'Porbandar',     'Junagadh',     150),
+(89, 'Express 89', 'Kozhikode',     'Kollam',       140),
+(90, 'Express 90', 'Dharmavaram',   'Anantapur',    160),
+(91, 'Express 91', 'Sironj',        'Vidisha',      130),
+(92, 'Express 92', 'Mandla',        'Dindori',      120),
+(93, 'Express 93', 'Gadag',         'Haveri',       150),
+(94, 'Express 94', 'Burdwan',       'Durgapur',     170),
+(95, 'Express 95', 'Karaikal',      'Nagapattinam',140),
+(96, 'Express 96', 'Tiruchirappalli','Karur',      160),
+(97, 'Express 97', 'Bally',         'Howrah',       200),
+(98, 'Express 98', 'Srinagar',      'Jammu',        180),
+(99, 'Express 99', 'Mangalore',     'Kasaragod',    160),
+(100,'Express 100','Pune',          'Aurangabad',   220);
+
+-- ---------------------------
+-- Insert 100 passengers (passenger_id 1..100)
+-- ---------------------------
+INSERT INTO passenger (passenger_id, passenger_name, passenger_age, passenger_gender, phone, email) VALUES
+(1,  'Passenger 1',   21, 'male',   '9000000101', 'passenger1@example.com'),
+(2,  'Passenger 2',   22, 'female', '9000000102', 'passenger2@example.com'),
+(3,  'Passenger 3',   23, 'male',   '9000000103', 'passenger3@example.com'),
+(4,  'Passenger 4',   24, 'female', '9000000104', 'passenger4@example.com'),
+(5,  'Passenger 5',   25, 'male',   '9000000105', 'passenger5@example.com'),
+(6,  'Passenger 6',   26, 'female', '9000000106', 'passenger6@example.com'),
+(7,  'Passenger 7',   27, 'male',   '9000000107', 'passenger7@example.com'),
+(8,  'Passenger 8',   28, 'female', '9000000108', 'passenger8@example.com'),
+(9,  'Passenger 9',   29, 'male',   '9000000109', 'passenger9@example.com'),
+(10, 'Passenger 10',  30, 'female', '9000000110', 'passenger10@example.com'),
+(11, 'Passenger 11',  31, 'male',   '9000000111', 'passenger11@example.com'),
+(12, 'Passenger 12',  32, 'female', '9000000112', 'passenger12@example.com'),
+(13, 'Passenger 13',  33, 'male',   '9000000113', 'passenger13@example.com'),
+(14, 'Passenger 14',  34, 'female', '9000000114', 'passenger14@example.com'),
+(15, 'Passenger 15',  35, 'male',   '9000000115', 'passenger15@example.com'),
+(16, 'Passenger 16',  36, 'female', '9000000116', 'passenger16@example.com'),
+(17, 'Passenger 17',  37, 'male',   '9000000117', 'passenger17@example.com'),
+(18, 'Passenger 18',  38, 'female', '9000000118', 'passenger18@example.com'),
+(19, 'Passenger 19',  39, 'male',   '9000000119', 'passenger19@example.com'),
+(20, 'Passenger 20',  40, 'female', '9000000120', 'passenger20@example.com'),
+(21, 'Passenger 21',  20, 'male',   '9000000121', 'passenger21@example.com'),
+(22, 'Passenger 22',  21, 'female', '9000000122', 'passenger22@example.com'),
+(23, 'Passenger 23',  22, 'male',   '9000000123', 'passenger23@example.com'),
+(24, 'Passenger 24',  23, 'female', '9000000124', 'passenger24@example.com'),
+(25, 'Passenger 25',  24, 'male',   '9000000125', 'passenger25@example.com'),
+(26, 'Passenger 26',  25, 'female', '9000000126', 'passenger26@example.com'),
+(27, 'Passenger 27',  26, 'male',   '9000000127', 'passenger27@example.com'),
+(28, 'Passenger 28',  27, 'female', '9000000128', 'passenger28@example.com'),
+(29, 'Passenger 29',  28, 'male',   '9000000129', 'passenger29@example.com'),
+(30, 'Passenger 30',  29, 'female', '9000000130', 'passenger30@example.com'),
+(31, 'Passenger 31',  30, 'male',   '9000000131', 'passenger31@example.com'),
+(32, 'Passenger 32',  31, 'female', '9000000132', 'passenger32@example.com'),
+(33, 'Passenger 33',  32, 'male',   '9000000133', 'passenger33@example.com'),
+(34, 'Passenger 34',  33, 'female', '9000000134', 'passenger34@example.com'),
+(35, 'Passenger 35',  34, 'male',   '9000000135', 'passenger35@example.com'),
+(36, 'Passenger 36',  35, 'female', '9000000136', 'passenger36@example.com'),
+(37, 'Passenger 37',  36, 'male',   '9000000137', 'passenger37@example.com'),
+(38, 'Passenger 38',  37, 'female', '9000000138', 'passenger38@example.com'),
+(39, 'Passenger 39',  38, 'male',   '9000000139', 'passenger39@example.com'),
+(40, 'Passenger 40',  39, 'female', '9000000140', 'passenger40@example.com'),
+(41, 'Passenger 41',  40, 'male',   '9000000141', 'passenger41@example.com'),
+(42, 'Passenger 42',  41, 'female', '9000000142', 'passenger42@example.com'),
+(43, 'Passenger 43',  42, 'male',   '9000000143', 'passenger43@example.com'),
+(44, 'Passenger 44',  43, 'female', '9000000144', 'passenger44@example.com'),
+(45, 'Passenger 45',  44, 'male',   '9000000145', 'passenger45@example.com'),
+(46, 'Passenger 46',  45, 'female', '9000000146', 'passenger46@example.com'),
+(47, 'Passenger 47',  46, 'male',   '9000000147', 'passenger47@example.com'),
+(48, 'Passenger 48',  47, 'female', '9000000148', 'passenger48@example.com'),
+(49, 'Passenger 49',  48, 'male',   '9000000149', 'passenger49@example.com'),
+(50, 'Passenger 50',  49, 'female', '9000000150', 'passenger50@example.com'),
+(51, 'Passenger 51',  50, 'male',   '9000000151', 'passenger51@example.com'),
+(52, 'Passenger 52',  51, 'female', '9000000152', 'passenger52@example.com'),
+(53, 'Passenger 53',  52, 'male',   '9000000153', 'passenger53@example.com'),
+(54, 'Passenger 54',  53, 'female', '9000000154', 'passenger54@example.com'),
+(55, 'Passenger 55',  54, 'male',   '9000000155', 'passenger55@example.com'),
+(56, 'Passenger 56',  55, 'female', '9000000156', 'passenger56@example.com'),
+(57, 'Passenger 57',  56, 'male',   '9000000157', 'passenger57@example.com'),
+(58, 'Passenger 58',  57, 'female', '9000000158', 'passenger58@example.com'),
+(59, 'Passenger 59',  58, 'male',   '9000000159', 'passenger59@example.com'),
+(60, 'Passenger 60',  59, 'female', '9000000160', 'passenger60@example.com'),
+(61, 'Passenger 61',  60, 'male',   '9000000161', 'passenger61@example.com'),
+(62, 'Passenger 62',  61, 'female', '9000000162', 'passenger62@example.com'),
+(63, 'Passenger 63',  62, 'male',   '9000000163', 'passenger63@example.com'),
+(64, 'Passenger 64',  63, 'female', '9000000164', 'passenger64@example.com'),
+(65, 'Passenger 65',  64, 'male',   '9000000165', 'passenger65@example.com'),
+(66, 'Passenger 66',  65, 'female', '9000000166', 'passenger66@example.com'),
+(67, 'Passenger 67',  66, 'male',   '9000000167', 'passenger67@example.com'),
+(68, 'Passenger 68',  67, 'female', '9000000168', 'passenger68@example.com'),
+(69, 'Passenger 69',  68, 'male',   '9000000169', 'passenger69@example.com'),
+(70, 'Passenger 70',  69, 'female', '9000000170', 'passenger70@example.com'),
+(71, 'Passenger 71',  70, 'male',   '9000000171', 'passenger71@example.com'),
+(72, 'Passenger 72',  71, 'female', '9000000172', 'passenger72@example.com'),
+(73, 'Passenger 73',  72, 'male',   '9000000173', 'passenger73@example.com'),
+(74, 'Passenger 74',  73, 'female', '9000000174', 'passenger74@example.com'),
+(75, 'Passenger 75',  74, 'male',   '9000000175', 'passenger75@example.com'),
+(76, 'Passenger 76',  75, 'female', '9000000176', 'passenger76@example.com'),
+(77, 'Passenger 77',  76, 'male',   '9000000177', 'passenger77@example.com'),
+(78, 'Passenger 78',  77, 'female', '9000000178', 'passenger78@example.com'),
+(79, 'Passenger 79',  78, 'male',   '9000000179', 'passenger79@example.com'),
+(80, 'Passenger 80',  79, 'female', '9000000180', 'passenger80@example.com'),
+(81, 'Passenger 81',  80, 'male',   '9000000181', 'passenger81@example.com'),
+(82, 'Passenger 82',  81, 'female', '9000000182', 'passenger82@example.com'),
+(83, 'Passenger 83',  82, 'male',   '9000000183', 'passenger83@example.com'),
+(84, 'Passenger 84',  83, 'female', '9000000184', 'passenger84@example.com'),
+(85, 'Passenger 85',  84, 'male',   '9000000185', 'passenger85@example.com'),
+(86, 'Passenger 86',  85, 'female', '9000000186', 'passenger86@example.com'),
+(87, 'Passenger 87',  86, 'male',   '9000000187', 'passenger87@example.com'),
+(88, 'Passenger 88',  87, 'female', '9000000188', 'passenger88@example.com'),
+(89, 'Passenger 89',  88, 'male',   '9000000189', 'passenger89@example.com'),
+(90, 'Passenger 90',  89, 'female', '9000000190', 'passenger90@example.com'),
+(91, 'Passenger 91',  90, 'male',   '9000000191', 'passenger91@example.com'),
+(92, 'Passenger 92',  91, 'female', '9000000192', 'passenger92@example.com'),
+(93, 'Passenger 93',  92, 'male',   '9000000193', 'passenger93@example.com'),
+(94, 'Passenger 94',  93, 'female', '9000000194', 'passenger94@example.com'),
+(95, 'Passenger 95',  94, 'male',   '9000000195', 'passenger95@example.com'),
+(96, 'Passenger 96',  95, 'female', '9000000196', 'passenger96@example.com'),
+(97, 'Passenger 97',  96, 'male',   '9000000197', 'passenger97@example.com'),
+(98, 'Passenger 98',  97, 'female', '9000000198', 'passenger98@example.com'),
+(99, 'Passenger 99',  98, 'male',   '9000000199', 'passenger99@example.com'),
+(100,'Passenger 100', 99, 'other',  '9000000200', 'passenger100@example.com');
+
+-- ---------------------------
+-- Insert 100 bookings (booking_id 1..100)
+-- train_id and passenger_id will be assigned so you can practice joins
+-- use a variety of travel dates, seat numbers, fares, and status
+-- ---------------------------
+INSERT INTO booking (booking_id, train_id, passenger_id, travel_date, seat_no, fare, status) VALUES
+(1,  1,  1,  '2025-10-01', 'S1',  500.00, 'confirmed'),
+(2,  2,  2,  '2025-10-02', 'S2',  650.00, 'confirmed'),
+(3,  3,  3,  '2025-10-03', 'S3',  450.00, 'cancelled'),
+(4,  4,  4,  '2025-10-04', 'S4',  550.00, 'confirmed'),
+(5,  5,  5,  '2025-10-05', 'S5',  700.00, 'confirmed'),
+(6,  6,  6,  '2025-10-06', 'S6',  420.00, 'confirmed'),
+(7,  7,  7,  '2025-10-07', 'S7',  480.00, 'confirmed'),
+(8,  8,  8,  '2025-10-08', 'S8',  530.00, 'confirmed'),
+(9,  9,  9,  '2025-10-09', 'S9',  600.00, 'confirmed'),
+(10, 10, 10, '2025-10-10', 'S10', 750.00, 'confirmed'),
+(11, 11, 11, '2025-10-11', 'S11', 320.00, 'confirmed'),
+(12, 12, 12, '2025-10-12', 'S12', 410.00, 'confirmed'),
+(13, 13, 13, '2025-10-13', 'S13', 260.00, 'cancelled'),
+(14, 14, 14, '2025-10-14', 'S14', 340.00, 'confirmed'),
+(15, 15, 15, '2025-10-15', 'S15', 290.00, 'confirmed'),
+(16, 16, 16, '2025-10-16', 'S16', 430.00, 'confirmed'),
+(17, 17, 17, '2025-10-17', 'S17', 210.00, 'confirmed'),
+(18, 18, 18, '2025-10-18', 'S18', 360.00, 'confirmed'),
+(19, 19, 19, '2025-10-19', 'S19', 370.00, 'confirmed'),
+(20, 20, 20, '2025-10-20', 'S20', 220.00, 'cancelled'),
+(21, 21, 21, '2025-10-21', 'S21', 180.00, 'confirmed'),
+(22, 22, 22, '2025-10-22', 'S22', 210.00, 'confirmed'),
+(23, 23, 23, '2025-10-23', 'S23', 160.00, 'confirmed'),
+(24, 24, 24, '2025-10-24', 'S24', 200.00, 'confirmed'),
+(25, 25, 25, '2025-10-25', 'S25', 250.00, 'confirmed'),
+(26, 26, 26, '2025-10-26', 'S26', 230.00, 'confirmed'),
+(27, 27, 27, '2025-10-27', 'S27', 190.00, 'confirmed'),
+(28, 28, 28, '2025-10-28', 'S28', 205.00, 'cancelled'),
+(29, 29, 29, '2025-10-29', 'S29', 175.00, 'confirmed'),
+(30, 30, 30, '2025-10-30', 'S30', 150.00, 'confirmed'),
+(31, 31, 31, '2025-11-01', 'S31', 310.00, 'confirmed'),
+(32, 32, 32, '2025-11-02', 'S32', 270.00, 'confirmed'),
+(33, 33, 33, '2025-11-03', 'S33', 290.00, 'confirmed'),
+(34, 34, 34, '2025-11-04', 'S34', 330.00, 'confirmed'),
+(35, 35, 35, '2025-11-05', 'S35', 350.00, 'cancelled'),
+(36, 36, 36, '2025-11-06', 'S36', 360.00, 'confirmed'),
+(37, 37, 37, '2025-11-07', 'S37', 240.00, 'confirmed'),
+(38, 38, 38, '2025-11-08', 'S38', 260.00, 'confirmed'),
+(39, 39, 39, '2025-11-09', 'S39', 280.00, 'confirmed'),
+(40, 40, 40, '2025-11-10', 'S40', 300.00, 'confirmed'),
+(41, 41, 41, '2025-11-11', 'S41', 310.00, 'confirmed'),
+(42, 42, 42, '2025-11-12', 'S42', 320.00, 'confirmed'),
+(43, 43, 43, '2025-11-13', 'S43', 330.00, 'confirmed'),
+(44, 44, 44, '2025-11-14', 'S44', 340.00, 'confirmed'),
+(45, 45, 45, '2025-11-15', 'S45', 350.00, 'confirmed'),
+(46, 46, 46, '2025-11-16', 'S46', 360.00, 'confirmed'),
+(47, 47, 47, '2025-11-17', 'S47', 370.00, 'confirmed'),
+(48, 48, 48, '2025-11-18', 'S48', 380.00, 'cancelled'),
+(49, 49, 49, '2025-11-19', 'S49', 390.00, 'confirmed'),
+(50, 50, 50, '2025-11-20', 'S50', 400.00, 'confirmed'),
+(51, 51, 51, '2025-11-21', 'S51', 420.00, 'confirmed'),
+(52, 52, 52, '2025-11-22', 'S52', 430.00, 'confirmed'),
+(53, 53, 53, '2025-11-23', 'S53', 440.00, 'confirmed'),
+(54, 54, 54, '2025-11-24', 'S54', 450.00, 'confirmed'),
+(55, 55, 55, '2025-11-25', 'S55', 460.00, 'confirmed'),
+(56, 56, 56, '2025-11-26', 'S56', 470.00, 'confirmed'),
+(57, 57, 57, '2025-11-27', 'S57', 480.00, 'confirmed'),
+(58, 58, 58, '2025-11-28', 'S58', 490.00, 'confirmed'),
+(59, 59, 59, '2025-11-29', 'S59', 500.00, 'confirmed'),
+(60, 60, 60, '2025-11-30', 'S60', 510.00, 'confirmed'),
+(61, 61, 61, '2025-12-01', 'S61', 520.00, 'confirmed'),
+(62, 62, 62, '2025-12-02', 'S62', 530.00, 'confirmed'),
+(63, 63, 63, '2025-12-03', 'S63', 540.00, 'confirmed'),
+(64, 64, 64, '2025-12-04', 'S64', 550.00, 'confirmed'),
+(65, 65, 65, '2025-12-05', 'S65', 560.00, 'confirmed'),
+(66, 66, 66, '2025-12-06', 'S66', 570.00, 'confirmed'),
+(67, 67, 67, '2025-12-07', 'S67', 580.00, 'confirmed'),
+(68, 68, 68, '2025-12-08', 'S68', 590.00, 'confirmed'),
+(69, 69, 69, '2025-12-09', 'S69', 600.00, 'confirmed'),
+(70, 70, 70, '2025-12-10', 'S70', 610.00, 'confirmed'),
+(71, 71, 71, '2025-12-11', 'S71', 620.00, 'confirmed'),
+(72, 72, 72, '2025-12-12', 'S72', 630.00, 'confirmed'),
+(73, 73, 73, '2025-12-13', 'S73', 640.00, 'confirmed'),
+(74, 74, 74, '2025-12-14', 'S74', 650.00, 'confirmed'),
+(75, 75, 75, '2025-12-15', 'S75', 660.00, 'confirmed'),
+(76, 76, 76, '2025-12-16', 'S76', 670.00, 'confirmed'),
+(77, 77, 77, '2025-12-17', 'S77', 680.00, 'confirmed'),
+(78, 78, 78, '2025-12-18', 'S78', 690.00, 'confirmed'),
+(79, 79, 79, '2025-12-19', 'S79', 700.00, 'confirmed'),
+(80, 80, 80, '2025-12-20', 'S80', 710.00, 'confirmed'),
+(81, 81, 81, '2025-12-21', 'S81', 720.00, 'confirmed'),
+(82, 82, 82, '2025-12-22', 'S82', 730.00, 'confirmed'),
+(83, 83, 83, '2025-12-23', 'S83', 740.00, 'cancelled'),
+(84, 84, 84, '2025-12-24', 'S84', 750.00, 'confirmed'),
+(85, 85, 85, '2025-12-25', 'S85', 760.00, 'confirmed'),
+(86, 86, 86, '2025-12-26', 'S86', 770.00, 'confirmed'),
+(87, 87, 87, '2025-12-27', 'S87', 780.00, 'confirmed'),
+(88, 88, 88, '2025-12-28', 'S88', 790.00, 'confirmed'),
+(89, 89, 89, '2025-12-29', 'S89', 800.00, 'confirmed'),
+(90, 90, 90, '2025-12-30', 'S90', 810.00, 'confirmed'),
+(91, 91, 91, '2025-12-31', 'S91', 820.00, 'confirmed'),
+(92, 92, 92, '2026-01-01', 'S92', 830.00, 'confirmed'),
+(93, 93, 93, '2026-01-02', 'S93', 840.00, 'confirmed'),
+(94, 94, 94, '2026-01-03', 'S94', 850.00, 'confirmed'),
+(95, 95, 95, '2026-01-04', 'S95', 860.00, 'confirmed'),
+(96, 96, 96, '2026-01-05', 'S96', 870.00, 'confirmed'),
+(97, 97, 97, '2026-01-06', 'S97', 880.00, 'confirmed'),
+(98, 98, 98, '2026-01-07', 'S98', 890.00, 'confirmed'),
+(99, 99, 99, '2026-01-08', 'S99', 900.00, 'confirmed'),
+(100,100,100,'2026-01-09', 'S100',910.00, 'confirmed');
+
+
+-- join 
+
+select * from booking;
+select * from passenger;
+select * from train;
+
+
+-- left join 
+
+select p.* ,b.* 
+from passenger as p 
+left join booking as b  
+on b.passenger_id = p.passenger_id;
+
+
+select p.* ,b.* 
+from booking as b 
+left join passenger as p
+on p.passenger_id = b.passenger_id;
+
+
+
+-- right join 
+select p.* ,b.* 
+from passenger as p 
+right join booking as b  
+on b.passenger_id = p.passenger_id;
+
+
+select p.* ,b.* 
+from booking as b 
+right join passenger as p
+on p.passenger_id = b.passenger_id;
+
+
+-- Inner JOin 
+
+select p.* ,b.* 
+from passenger as p 
+join booking as b  
+on b.passenger_id = p.passenger_id;
+
+
+select p.* ,b.* 
+from booking as b 
+inner join passenger as p
+on p.passenger_id = b.passenger_id;
+
+
+
+
