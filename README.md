@@ -279,4 +279,18 @@ CHAR stores fixed-length strings, padding shorter values with spaces to reach th
 <img width="1388" height="715" alt="inner join ( join )" src="https://github.com/user-attachments/assets/61c1ba7f-6d77-40dc-8232-0d005f8b2807" />
 
 
+# 2025 - 10 - 17 
 
+SELECT COUNT(*) FROM medical_costs 
+WHERE Age BETWEEN 18 AND 25;
+
+👉 BETWEEN is inclusive — it includes both the boundary values.
+So this query counts all rows where
+Age >= 18 AND Age <= 25.
+
+SELECT COUNT(*) FROM medical_costs 
+WHERE Age > 18 AND Age < 25;
+
+👉 This query is exclusive — it does not include 18 and 25.
+It only counts rows where
+Age is strictly greater than 18 and strictly less than 25.
