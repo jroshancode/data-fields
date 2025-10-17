@@ -53,8 +53,24 @@ select * from medical_costs where Age > 25 and age <30;
 -- fetch the Medical reports for age more or equal to 25 and less than or equal 30
 select * from medical_costs where Age >= 25 and age <=30;
 
--- between  ( use for filtring range value like age , date/time etc ) 
+
+-- Between  ( use for filtring range value like age , date/time etc ) 
+SELECT COUNT(*) FROM medical_costs 
+WHERE Age BETWEEN 18 AND 25;
+
+👉 BETWEEN is inclusive — it includes both the boundary values.
+So this query counts all rows where
+Age >= 18 AND Age <= 25.
+
+SELECT COUNT(*) FROM medical_costs 
+WHERE Age > 18 AND Age < 25;
+
+👉 This query is exclusive — it does not include 18 and 25.
+It only counts rows where
+Age is strictly greater than 18 and strictly less than 25.
+
 select * from medical_costs where Age between 25 and 30;
+
 
 select * from medical_costs where age <=30;
 
