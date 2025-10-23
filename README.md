@@ -294,3 +294,10 @@ WHERE Age > 18 AND Age < 25;
 👉 This query is exclusive — it does not include 18 and 25.
 It only counts rows where
 Age is strictly greater than 18 and strictly less than 25.
+
+
+# 2025 - 10 - 23 
+<img width="644" height="454" alt="union-interset-except" src="https://github.com/user-attachments/assets/5712da4c-e395-4eaf-9757-e453ee74f076" />
+<img width="263" height="191" alt="image" src="https://github.com/user-attachments/assets/ff3c6491-8e50-4433-8dd6-247fe4f68167" />
+
+
