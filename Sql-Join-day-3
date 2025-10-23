@@ -1,0 +1,138 @@
+# 2025 - 10 - 23 
+
+use classroom;
+select * from departments;
+select * from employees;
+
+use rock_sql; -- load database 
+
+-- 🔁 SELF JOIN 🔹SELF JOIN (join a table to itself)
+-- 🪞 Joins a table to itself (e.g., hierarchy)
+
+-- Created emp - manager table
+CREATE TABLE emp_manager (
+    Emp_ID INT PRIMARY KEY,
+    Emp_Name VARCHAR(50),
+    Manager_ID INT
+);
+
+-- Insert into emp- manager
+INSERT INTO emp_manager VALUES
+(1, 'Alice', NULL),
+(2, 'Bob', 1),
+(3, 'Charlie', 1),
+(4, 'David', 2),
+(5, 'Eve', 2);
+
+-- Employees Table
+CREATE TABLE Employees (
+    Emp_ID INT PRIMARY KEY,
+    Emp_Name VARCHAR(50),
+    Dept_ID INT
+);
+
+-- Insert into Employees
+INSERT INTO Employees VALUES
+(1, 'Alice', 101),
+(2, 'Bob', 102),
+(3, 'Charlie', NULL),
+(4, 'David', 104),
+(5, 'Eve', 105)
+-- (6, 'Alice', 101),
+-- (7, 'Bob', 102),
+-- (8, 'Charlie', NULL),
+-- (9, 'David', 104),
+-- (10, 'Eve', 105);
+
+select * from emp_manager;
+select * from employees;
+
+
+
+-- self join 
+select * 
+from emp_manager emp1 ,emp_manager emp2 
+where emp1.EmpID = emp2.ManagerId;
+
+
+select * 
+from emp_manager emp1 
+left join emp_manager emp2 
+on emp1.EmpID = emp2.ManagerId;
+
+select * from emp_manager;
+-- find total number of employee in each manager 
+select emp2.ManagerId, count(emp1.EmpID) 
+from emp_manager emp1 
+left join emp_manager emp2 
+on emp1.EmpID = emp2.ManagerId
+group by emp2.ManagerId;
+
+
+-- cross join 
+select * from train ;
+select * from passenger;
+select * from booking;
+
+select * 
+from train 
+cross join booking ;
+
+select * 
+from train 
+cross join booking 
+on booking.train_id = train.train_id;
+
+-- using where
+select * 
+from train 
+cross join booking where 
+booking.train_id = train.train_id;
+
+-- Union all 
+(select train_id 
+from booking ) 
+union all
+(select train_id 
+from train ) ;
+-- union 
+(select train_id 
+from booking ) 
+union 
+(select train_id 
+from train ) ;
+
+-- intersept 
+(select train_id 
+from booking ) 
+INTERSECT 
+(select train_id 
+from train ) 
+
+-- except ( A - B ) 
+(select train_id 
+from booking ) 
+except 
+(select train_id 
+from train ) ;
+-- ( B - A ) 
+(select train_id 
+from train ) 
+except 
+(select train_id 
+from booking );
+
+
+
+-- full outer join 
+( select * 
+from emp_manager emp1 
+left join emp_manager emp2 
+on emp1.EmpID = emp2.ManagerId ) 
+
+union 
+(select * 
+from emp_manager emp1 
+right join emp_manager emp2 
+on emp1.EmpID = emp2.ManagerId) ;
+
