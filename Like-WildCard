@@ -1,0 +1,118 @@
+# 2025 - 10 - 24 
+
+use my_db;
+select * from train;
+
+-- Like and wild card ( Sarching like as Pattern ) 
+-- %% ( anything) 
+-- _ ( underscore )  ( fixed )  number of letter 
+
+-- Like ( %) 
+select * from train;
+select * from train where `Product Name` like "%%"; -- any things
+
+-- fetech all product name which contain letter z
+select * from train where `Product Name` like "%z%";
+
+
+-- fetech all product name which contain letter zz ( consistency ) 
+select * from train where `Product Name` like "%zz%";
+
+-- Get all product name which start with first letter is a, e, i , o ,u 
+select `Product Name` from train
+where `Product Name` like "a%" or `Product Name` like "e%"
+or `Product Name` like "i%" or `Product Name` like "o%"
+or `Product Name` like "u%";
+
+-- Get all product name which last latter end with is a , e , i , o , u 
+select `Product Name`  from  train  
+where  `Product Name`  like "%a" or  `Product Name`  like "%e"
+or  `Product Name`  like "%i" or  `Product Name`  like "%o"
+or  `Product Name`  like "%u";
+
+select * from classroom.passenger;
+
+-- Get the all passenger info whoes email contain .in ? 
+select * from classroom.passenger where email like "%.in%";
+
+select count(*) from classroom.passenger where email like "%.in%";
+
+
+-- Get all product name which start with first letter is aa, ae , ai, au, ao 
+select `Product Name` from train
+where `Product Name` like "ae%" or `Product Name` like "aa%"
+or `Product Name` like "ai%" or `Product Name` like "ao%"
+or `Product Name` like "au%";
+
+-- Get all product name which last latter end with is aa, ae , ai , ao , au 
+select `Product Name`  from  train  
+where  `Product Name`  like "%aa" or  `Product Name`  like "%ae"
+or  `Product Name`  like "%ai" or  `Product Name`  like "%ao"
+or  `Product Name`  like "%au";
+
+-- Get all Customer name from train table  who's name last letter is a , e , i , o , u 
+select * from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+-- number of records 
+-- count number of records to customer name end with a, e , i , o and u
+select count(*) from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+-- Get all Customer name from train table who's name first letter is a , e , i , o , u 
+select count(*)  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- count number of unique records 
+
+select distinct count(*)  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- search anywhere in name column 
+select * from train 
+where `Customer Name` like "%a%";
+
+--  Fetch all Customer's name which contain second letter is  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "_a%" or `Customer Name` like "_e%"
+or `Customer Name` like "_i%" or `Customer Name` like "_o%"
+or `Customer Name` like "_u%";
+
+
+--  Fetch all Customer's name who's Second last letter end with  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "%a_" or `Customer Name` like "%e_"
+or `Customer Name` like "%i_" or `Customer Name` like "%o_"
+or `Customer Name` like "%_u";
+
+-- Get all product name which start with aa , ee , ii ,oo ,uu
+select * from train 
+where `Product name` like "aa%" or `Product name` like "ee%"
+or `Product name` like "ii%" or `Product name` like "oo%" 
+or `Product name` like "uu%";
+
+
+--  Fetch all Customer's name which contain third letter is  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "__a%" or `Customer Name` like "__e%"
+or `Customer Name` like "__i%" or `Customer Name` like "__o%"
+or `Customer Name` like "__u%";
+
+--  Fetch all Customer's name who's Second last letter end with  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "%a__" or `Customer Name` like "%e__"
+or `Customer Name` like "%i__" or `Customer Name` like "%o__"
+or `Customer Name` like "%__u";
+
+
+-- update classroom.passenger set email = replace(email,'com','in') 
+-- where passenger_id %2=0 and passenger_id %7=0;
+
