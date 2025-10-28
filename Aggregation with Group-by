@@ -1,0 +1,91 @@
+use classroom;
+select * from medical_costs;
+
+-- Aggregation or Aggregated ( count,max,min,avg,sum ) 
+-- count total records 
+select count(*), `medical cost` from medical_costs;
+
+-- sum() , avg(), max(),min(),count()
+select sum(`Medical Cost`) as total_cost , avg(`Medical Cost`) average_of_costs
+, max(`Medical Cost`),min(`Medical Cost`),count(`Medical Cost`) from medical_costs 
+where gender = 'female';
+
+select * from medical_costs where `medical cost`in('20234.32','3653.5');
+
+-- find sum of medical cost for gender is female 
+select sum(`Medical Cost`) from medical_costs 
+where gender = 'female';
+
+select * from booking;
+
+select max(travel_date),min(travel_date),sum(fare),avg(fare),count(travel_date)
+from booking;
+
+
+-- Group by 
+
+select * from medical_costs;
+
+-- aggregated and nonaggregated column with group by 
+select children,avg(`medical cost`) from medical_costs
+where children = 0;
+select children,avg(`medical cost`) from medical_costs
+where children = 1;
+select children,avg(`medical cost`) from medical_costs
+where children = 2;
+select children,avg(`medical cost`) from medical_costs
+where children = 3;
+select children,avg(`medical cost`) from medical_costs
+where children = 4;
+
+select children,avg(`medical cost`) from medical_costs
+where children in(5,6);
+
+select children,avg(`medical cost`) from medical_costs
+where children = 5;
+
+select children,avg(`medical cost`) from medical_costs
+group by children;
+
+
+-- 11:41:33	select children,avg(`medical cost`) 
+-- from medical_costs LIMIT 0, 10000	Error Code: 1140. In aggregated 
+-- query without GROUP BY, expression 
+-- #1 of SELECT list contains nonaggregated column 
+-- 'classroom.medical_costs.Children'; 
+-- this is incompatible with sql_mode=only_full_group_by	0.000 sec
+
+
+-- find all aggregation result for each smoker and gender
+select smoker,gender, sum(`Medical Cost`) as total_cost , avg(`Medical Cost`) average_of_costs
+, max(`Medical Cost`),min(`Medical Cost`),count(`Medical Cost`) from medical_costs 
+group by smoker,gender;
+
+select * from my_db.train;
+-- find the total sales and average of sales for each region ?
+select region ,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by region;
+
+-- Find the total sales and average of sales for each Category ?
+select Category ,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by Category;
+
+-- Find the total sales and average of sales for each category & sub-category ?
+select Category, `sub-category`,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by Category,`sub-category` order by count(sales) desc;
+
+-- Having 
+
+-- find the total sales and average of sales for each region where total sale is more than 4000?
+select region ,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by region having sum(sales) > 4000;
+
+
+-- Find the total sales and average of sales for each Category 
+-- where total number of sales for each region is more then 50 ?
+select Category ,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by Category having count(sales) >50;
+
+select Category ,avg(sales),sum(sales) ,count(sales) 
+from my_db.train group by Category having count(sales) <50;
+
