@@ -1,0 +1,296 @@
+# 2025 - 10 - 27
+
+use my_db;
+select * from train;
+
+-- Like and wild card ( Sarching like as Pattern ) 
+-- %% ( anything) 
+-- _ ( underscore )  ( fixed )  number of letter 
+
+-- Like ( %) 
+select * from train;
+select * from train where `Product Name` like "%%"; -- any things
+
+-- fetech all product name which contain letter z
+select * from train where `Product Name` like "%z%";
+
+-- Fetech all product name which contain letter zz ( Consistency ) 
+select * from train where `Product Name` like "%zz%";
+
+-- Get all product name which start with first letter is a, e, i , o ,u 
+select `Product Name` from train
+where `Product Name` like "a%" or `Product Name` like "e%"
+or `Product Name` like "i%" or `Product Name` like "o%"
+or `Product Name` like "u%";
+
+
+-- Get all product name which last latter end with is a , e , i , o , u 
+select `Product Name`  from  train  
+where  `Product Name`  like "%a" or  `Product Name`  like "%e"
+or  `Product Name`  like "%i" or  `Product Name`  like "%o"
+or  `Product Name`  like "%u";
+
+select * from classroom.passenger;
+
+-- Get the all passenger info whoes email contain .in ? 
+select * from classroom.passenger where email like "%.in%";
+
+select count(*) from classroom.passenger where email like "%.in%";
+
+
+-- Get all product name which start with first letter is aa, ae , ai, au, ao 
+select `Product Name` from train
+where `Product Name` like "ae%" or `Product Name` like "aa%"
+or `Product Name` like "ai%" or `Product Name` like "ao%"
+or `Product Name` like "au%";
+
+-- Get all product name which last latter end with is aa, ae , ai , ao , au 
+select `Product Name`  from  train  
+where  `Product Name`  like "%aa" or  `Product Name`  like "%ae"
+or  `Product Name`  like "%ai" or  `Product Name`  like "%ao"
+or  `Product Name`  like "%au";
+
+-- Get all Customer name from train table  who's name last letter is a , e , i , o , u 
+select * from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+-- number of records 
+-- count number of records to customer name end with a, e , i , o and u
+select count(*) from train 
+where `Customer Name` like "%a" or `Customer Name` like "%e"
+or `Customer Name` like "%i" or `Customer Name` like "%o"
+or `Customer Name` like "%u";
+
+-- Get all Customer name from train table who's name first letter is a , e , i , o , u 
+select count(*)  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- count number of unique records 
+
+select distinct count(*)  from train  
+where `Customer Name` like "a%" or `Customer Name` like "e%"
+or `Customer Name` like "i%" or `Customer Name` like "o%"
+or `Customer Name` like "u%";
+
+-- search anywhere in name column 
+select * from train 
+where `Customer Name` like "%a%";
+
+--  Fetch all Customer's name which contain second letter is  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "_a%" or `Customer Name` like "_e%"
+or `Customer Name` like "_i%" or `Customer Name` like "_o%"
+or `Customer Name` like "_u%";
+
+
+--  Fetch all Customer's name who's Second last letter end with  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "%a_" or `Customer Name` like "%e_"
+or `Customer Name` like "%i_" or `Customer Name` like "%o_"
+or `Customer Name` like "%_u";
+
+-- Get all product name which start with aa , ee , ii ,oo ,uu
+select * from train 
+where `Product name` like "aa%" or `Product name` like "ee%"
+or `Product name` like "ii%" or `Product name` like "oo%" 
+or `Product name` like "uu%";
+
+
+--  Fetch all Customer's name which contain third letter is  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "__a%" or `Customer Name` like "__e%"
+or `Customer Name` like "__i%" or `Customer Name` like "__o%"
+or `Customer Name` like "__u%";
+
+--  Fetch all Customer's name who's Second last letter end with  a , e , i ,u , o 
+select * from train
+where `Customer Name` like "%a__" or `Customer Name` like "%e__"
+or `Customer Name` like "%i__" or `Customer Name` like "%o__"
+or `Customer Name` like "%__u";
+
+
+-- update classroom.passenger set email = replace(email,'com','in') 
+-- where passenger_id %2=0 and passenger_id %7=0;
+
+
+-- Regex expression 
+select `Customer Name` from train where `Customer Name` regexp 'p'; # search
+select `Customer Name` from train where `Customer Name` regexp '^a';  # start with a ( ^ (Caret) ) 
+select `Customer Name` from train where `Customer Name` regexp 'a$'; # end with a ( $ (Dollar Sign): ) 
+select `Customer Name` from train where `Customer Name` regexp 'a+'; # 1 or more 
+select `Customer Name` from train where `Customer Name` regexp 'a*'; # o or more
+select `Customer Name` from train where `Customer Name` regexp 'xyz';
+select `Product Name` from train where `Product Name` regexp '.'; # anything 
+
+select 'abcdefghijklmnopqrstuvwxy' regexp '[z]';
+
+select `Product Name` from train where `Product Name` regexp '[aeiou]';
+select `Product Name` from train where `Product Name` regexp '[a-z]'; # range
+select `Product Name` from train where `Product Name` regexp '[A-Z]'; # range
+
+
+-- start with [a-z] or [A-z] 
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '^[aeiou]'; # range
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '[A-Z]'; # range
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '^[a-z]'; # range
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '^[A-Z]'; # range
+
+
+-- End with [aeiou] or [a-z] or [A-Z] 
+select `Product Name` , `Customer Name` from train where `Customer Name` regexp '[aeiou]$'; # range
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '[aeiou]$'; # range
+
+select `Product Name` , `Customer Name` from train where `Product Name` regexp '[A-Z]$'; # range
+select `Product Name` , `Customer Name` from train where `Customer Name` regexp '[a-z]$'; # range
+select `Product Name` , `Customer Name` from train where `Customer Name` regexp '^[A-Z]$'; # range
+select `Product Name` , `Customer Name` from train where `Customer Name` regexp '[p-z]$'; # range
+
+
+You said it returns names that end with a period (.) — like
+"Ramu." or "Savio." — even though . isn’t a vowel.
+
+-- ⚠️ Why This Happens
+
+# In MySQL:
+
+-- REGEXP uses POSIX regular expressions, not full PCRE syntax like in Python.
+
+-- By default, the . (dot) in your data may still be matched because MySQL’s REGEXP doesn’t enforce strict case-sensitivity or ASCII-only behavior when collations are involved (especially utf8_general_ci or similar).
+
+# In short:
+
+-- Some collations make MySQL treat certain punctuation marks or accented characters as “equivalent” in a loose sense — so REGEXP '[aeiou]$' can match words ending with characters that aren’t pure letters, like "Ramu.".
+
+# ✅ Correct (Strict) Fix — Use Binary Collation
+
+-- To make regex case-sensitive and exact, force MySQL to use binary comparison:
+
+SELECT `Product Name`, `Customer Name`
+FROM train
+-- WHERE `Customer Name` COLLATE utf8mb4_bin REGEXP '[aeiou]$';
+WHERE `Product Name` REGEXP '[aeiou]$' 
+  AND `Product Name` NOT REGEXP '\\.$';
+
+
+
+-- Question and answering 
+
+select '123muskan' regexp '^[a-zA-z]';  # start with 
+select 'muskan123' regexp '^[a-zA-z].*'; # start with 
+select 'Adi123' regexp '^[a-zA-z].*[0-9@]$'; # start with , anything in middle and end with 
+select 'Nishant123@' regexp '^[a-zA-z].*[0-9@]$'; # start with , anything in middle and end with 
+
+select 'Nishant123' regexp '^[a-zA-z]*[0-9@]$';  # without handling middle part
+select 'Adi123@' regexp '^[a-zA-z]*[0-9@]$'; # without handling middle part
+
+select 'Adi@123' regexp '^[a-zA-z].+[0-9@]$'; # start with , 1 or more in middle and end with 
+select 'Nishant@123A' regexp '^[a-zA-z].+[0-9@]$'; # start with , 1 or more in middle and end with 
+select 'Adi123A@' regexp '^[a-zA-z].+[0-9@]$';  # start with , 1 or more in middle and end with 
+
+select 'jroshan123' regexp '^[a-zA-z]*[0-9@]$';
+select 'jroshan123' regexp '^[a-zA-z]*[0-9]$';
+
+select '123jroshan@98' regexp '^[a-zA-z].*[0-9@]$';
+select '123jroshan@98#' regexp '^[a-zA-z].*[0-9@]$';
+
+select 'a#1' regexp '[a-zA-Z].*[0-9@]$';
+select 'a#1' regexp '^[a-zA-Z].*[0-9@]$';
+select 'a@' regexp '^[a-zA-Z]*[0-9@]$';
+select 'a123' regexp '^[a-zA-Z]*[0-9@]$';
+select 'a123@' regexp '^[a-zA-Z]*[0-9@]$';
+select '123@' regexp '^[a-zA-Z0-9].*[0-9@]$';
+
+-- Not 
+select 'jroshan123' regexp '^[a-zA-z].+[0-9]$';
+select 'jroshan123' not regexp '^[a-zA-z].+[0-9]$';
+select 'jroshan123' regexp '^[^a-zA-z].+[0-9]$';
+select '123jroshan123' regexp '^[^a-zA-z].+[0-9]$';
+
+-- {n}: Matches exactly n occurrences.
+select 'ababab' regexp 'a{2}';
+select 'aabab' regexp 'a{2}';
+select 'abab' regexp 'ab{2}';
+
+-- {n,}: Matches at least n occurrences.
+select 'ababab' regexp 'a{2,}';
+select 'aabab' regexp 'a{2,}';
+select 'aabababc' regexp 'ab{3,}';
+select 'aababbbabc' regexp 'ab{3,}';
+
+-- {n,m}: Matches between n and m occurrences.
+select 'aaabab' regexp 'a{2,3}';
+select 'aa' regexp 'a{2,3}';
+select 'aaaabababc' regexp 'a{2,3}';
+select 'abbbababc' regexp 'ab{3,4}';
+
+-- Phone number validation ( start with 6,7,8,9  and 10 digit ) 
+select '0987654321' regexp '^[6-9]';
+select '0987654321' regexp '^[6789]';
+
+select '987654321' regexp '^[6789]';  # start with 9,8,7,6
+select '8907654321' regexp '^[6789]'; # start with 9,8,7,6 
+select '7890654321' regexp '^[6789]'; # start with 9,8,7,6
+select '6789054321' regexp '^[6789]'; # start with 9,8,7,6
+
+
+select '0987654321' regexp '^[6789][0-9]';  # start with 9,8,7,6 
+select '9087654321' regexp '^[6789][0-9]';  # start with 9,8,7,6 
+select '90876543A1' regexp '^[6789][0-9]$'; # start with 9,8,7,6 and containe only number
+select '908765431A' regexp '^[6789][0-9]$'; # start with 9,8,7,6 and containe only number
+
+-- verified phone number
+select '9087654321' regexp '^[6789][0-9]{9}$';
+select '9087654A321' regexp '^[6789][0-9]{9}$';
+select '908765431A' regexp '^[6789][0-9]{9}$';
+
+-- start and end 
+select 'jroshan' regexp '^R.*n$';
+select 'Roshan' regexp '^R.*n$';
+
+-- start 
+select 'jroshan' regexp '.{1}r';
+
+-- only 
+select '0987654321' regexp '^[0-9]';
+select '0987654321#' regexp '^[0-9]';
+select '0987654321#' regexp '^[0-9][0-9]';
+select '0987654321#' regexp '^[0-9]+[0-9][0-9]$';
+
+select '123-456-7890' regexp '^[0-9][0-9]';
+select '123-456-7890' regexp '^[0-9][0-9-]';
+
+select '123-456-7890' regexp '^[0-9][0-9-]$';
+
+select '123-456-7890' regexp '^[0-9]+[0-9-]+[0-9]$+';
+select '123-456-7890' regexp '^[0-9]*[0-9-]*[0-9]$+';
+select '123-456-7890' regexp '^[0-9]*[0-9-]*[0-9]$*';
+
+
+select '123-456-7890' regexp '^[0-9]{3}-{1}[0-9]{3}-{1}[0-9]{4}';
+select '123-456-7890' regexp '^[123]{3}-{1}[0-9]{3}-{1}[0-9]{4}$';
+
+-- zip code 
+select '123456' regexp '^[0-9]{6}$';
+
+select 'Apple' regexp '^[Aa]pple|[Ss]amsung';
+select 'samsung' regexp '^[Aa]pple|[Ss]amsung';
+select 'Android' regexp '^[Aa]pple|[Ss]amsung';
+
+
+-- email 
+select 'anchalsharma@gmail.com' regexp "[a-zA-Z]+[-.A-Za-z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$";
+select 'akaditykumar@gmail.com' regexp "[a-zA-Z]+[-.A-Za-z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$" ;
+select 'jroshancode@gmai.com' regexp "[a-zA-Z]+[-.A-Za-z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$" ;
+select 'gitechno.in@gmail.com' regexp "[a-zA-Z]+[-.A-Za-z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,3}$";
+
+select 'nishantnarwat0@gmail.com' regexp "[a-zA-Z0-9]+[-.A-Za-z0-9]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,3}$";
+
+select 'gitechno.in@gmail.com' regexp "[a-zA-Z]*[A-Za-z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z]{3}|[a-zA-Z]{2}$$";
+
+-- '^[a-z0-9._%-]+@[a-z0-9]+\\.[a-z]{2,}$
+
+select 'saifimu005@gmail.com' regexp '^[a-z0-9._%-]+@[a-z0-9.]+\\.[a-z]{2,}$';
