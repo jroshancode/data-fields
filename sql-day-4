@@ -44,7 +44,7 @@ Keys and Constrainsts:-
 
 2. Unique   ( Always store unique but may or not null values)
 
-3. Primary Key  ( Always store unique or never null values ) Unique + not null 
+3. Primary Key  ( Always store unique and never null values ) Unique + not null 
 
 4. checks    ( [Male, Female ,Other])  or ( age > 18 ) 
 
