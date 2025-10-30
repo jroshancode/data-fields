@@ -1,0 +1,46 @@
+# 2025 - 10 - 30 
+
+use classroom;
+
+-- Data clenaing ( string funciton , math function , date/time funciton ) 
+select * from diwali_sales;
+
+
+-- Math Function 
+-- Count, Sum,Avg , Min amd Max 
+
+
+-- for each category 
+select State, avg(Amount) , sum(Amount) , min(Amount) , 
+max(Amount) ,count(*) from diwali_sales group by category;
+
+-- round , truncate 
+
+select State, round(avg(Amount),2) , truncate(sum(Amount),2) ,
+round(avg(Amount),3) , truncate(sum(Amount),3), min(Amount) , 
+max(Amount) ,count(*) from diwali_sales group by State;
+
+-- ceil , floor , abs, sign 
+select State,ceil(avg(Amount)) , ceil(sum(Amount)) ,
+floor(avg(Amount)) , floor(sum(Amount)), min(Amount) , 
+max(Amount) ,count(*) from diwali_sales group by State;
+
+select abs(-056) , sign(-56), sign(566.5454) ;
+
+
+
+create table testing_abc as ( 
+select amount, round(mod(amount,10),2) , round(amount % 10,3), round(amount / 10 , 3) 
+from diwali_sales ) ;
+
+select * from testing_abc;
+
+-- power , square 
+select amount, power(amount,2), round(sqrt(amount),2) ,
+
+power(round(sqrt(amount),2) ,2)
+from diwali_sales;
+
+
+
+
