@@ -89,6 +89,29 @@ from train
 cross join booking where 
 booking.train_id = train.train_id;
 
+-- Number of column should be same
+Union - Combine rows from both queries. No duplicates.
+Intersect - keep only rows that are common in both queries.
+Except- keep rows only from left query that are not present in right query.
+
+-- Union
+-- table -A  
+-- 1
+-- 2 
+-- 3 
+-- 4 
+-- 5 
+-- Table -B
+-- 7
+-- 4
+-- 8
+-- 5 
+( A union B ) -> 1,2,3,4,5,7,8
+( A union all B) -> 1,2,3,4,5,7,4,8,5
+
+INTERSECT -> 4, 5
+except ->  1 , 2 , 3
+
 -- Union all 
 (select train_id 
 from booking ) 
