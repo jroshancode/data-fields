@@ -278,6 +278,10 @@ CHAR stores fixed-length strings, padding shorter values with spaces to reach th
 # Inner Join and Join
 <img width="1388" height="715" alt="inner join ( join )" src="https://github.com/user-attachments/assets/61c1ba7f-6d77-40dc-8232-0d005f8b2807" />
 
+# Self Join 
+<img width="300" height="168" alt="image" src="https://github.com/user-attachments/assets/36368519-5146-4f3b-98fd-0eaac61a253f" />
+
+
 
 # 2025 - 10 - 17 
 
