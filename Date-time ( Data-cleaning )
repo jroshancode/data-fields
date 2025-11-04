@@ -38,6 +38,33 @@ quarter(new_order_date) from train;
 
 select dayofyear(now());
 
+# 🔀 Formatting and Conversion
+# --Function	Description	Example	Output
+DATE_FORMAT(date, format)	Format a date string	SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i');	2025-04-24 15:30 <br>
+STR_TO_DATE(str, format)	Convert string to date	SELECT STR_TO_DATE('24-04-2025','%d-%m-%Y');	2025-04-24 <br>
+TIME_FORMAT(time, format)	Format time	SELECT TIME_FORMAT('15:30:45', '%H:%i');	15:30 <br>
+EXTRACT(unit FROM date)	Extract date part	SELECT EXTRACT(YEAR FROM '2025-04-24');	2025  <br>
+
+SELECT now(),DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'),DATE_FORMAT(NOW(), '%y-%m-%d %h:%i:%s');
+-- Get only the time part (HH:MM:SS) from the created_at column in the logs table.
+
+%M -> month name 
+%I -> hour number ( 12 hours time ) 
+%p -> am/pm ( 12  hours ) 
+%a -> short week name  
+%W -> full week name 
+
+%Y -> full year number 
+%y -> short year number 
+%m -> month  number 
+%d -> days number 
+%H -> ( 24 hours ) 
+%h -> ( 12 hours ) 
+%i -> minutes 
+%s -> second 
+
+select now(),date_format(now(),"%H:%i:%s") , date_format(now(),"%H:%I:%S")
+
 
 -- -- Date format 
 select new_order_date, date_format(new_order_date,"%Y-%m-%d"),date_format(new_order_date,"%h-%i-%s %p"), date_format(new_order_date,"%W-%M-%Y"),
