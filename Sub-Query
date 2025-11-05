@@ -1,0 +1,99 @@
+# 2025 - 11 - 05 
+
+A subquery in MySQL is a SELECT statement nested within another SQL statement. 
+It is also known as an inner query or nested query, 
+while the statement containing it is referred to as the outer query or main query. 
+Subqueries are always enclosed in parentheses.
+
+
+Write a solution to report the movies  
+with an odd- numbered ID and a description that is not "boring" ?
+
+m_id | name | price | author | description | launched_date
+
+
+use classroom;
+select * from booking;
+
+select * from booking order by new_fare desc limit 1 offset 1 ;
+
+-- right ot left 
+-- first will be executed your inner or sub-query then Outer query or main query 
+
+# Find the Second Highest New Fare Booking Price . 
+select max(new_fare) from booking where new_fare < ( select max(new_fare) from booking );
+
+select max(new_fare) from booking where new_fare < ( select max(new_fare) from booking 
+where new_fare < (select max(new_fare) from booking));
+
+--Find Second highest medical charges for each Region ;
+select * from medical_costs;
+
+select Region, max(`medical Cost`) from medical_costs 
+where `medical Cost`
+group by Region;
+
+In SQL, ANY, ALL, and EXISTS are operators used primarily with subqueries to perform conditional filtering and comparisons.
+
+# 1. ANY Operator:
+The ANY operator returns TRUE if any of the values returned by a subquery satisfy the condition. <br>
+It must be preceded by a comparison operator (e.g., =, >, <, >=, <=, <>). <Br>
+Example:
+
+    SELECT Region
+    FROM medical_costs
+    WHERE `medical cost` > ANY (SELECT `medical cost` FROM medical_costs WHERE children = '1');
+-- This query returns Region whose medical cost price is greater than at least one `medical cost` for the children '1' .
+
+# 2. ALL Operator:
+The ALL operator returns TRUE if all of the values returned by a subquery satisfy the condition. <br>
+It also must be preceded by a comparison operator. <br>
+Example:
+Code
+
+    SELECT Region
+    FROM medical_costs
+    WHERE `medical cost` > ALL (SELECT `medical cost` FROM medical_costs WHERE smoker = 'yes');
+-- This query returns region whose `medical cost` price is greater than all medical charges prices for smoker is yes.
+
+# 3. EXISTS Operator:
+The EXISTS operator returns TRUE if the subquery returns any rows, and FALSE if the subquery returns no rows. <br>
+It does not require a comparison operator. It simply checks for the existence of rows. <Br>
+Example:
+Code
+    SELECT CustomerName
+    FROM Customers
+    WHERE EXISTS (SELECT OrderID FROM Orders WHERE Customers.CustomerID = Orders.CustomerID);
+
+# This query returns customer names for customers who have placed at least one order.
+
+# Key Differences:
+1. ANY and ALL are used for value comparisons against a set of values returned by a subquery.
+2. EXISTS is used for checking the existence of rows returned by a subquery, without performing value-by-value comparisons.
+3. EXISTS is often more efficient than IN for checking existence, especially with large subquery results, as it stops processing once it finds the first matching row. 
+
+
+
+select Region, max(`medical Cost`) from medical_costs 
+where `medical Cost` < all ( select max(`medical Cost`) from medical_costs group by region)
+group by Region;
+
+-- Verify the query 
+select * from medical_costs where region = 'northwest' 
+order by `medical Cost` desc;
+select * from medical_costs where region = 'northeast' 
+order by `medical Cost` desc;
+
+select * from medical_costs where region = 'southwest' 
+order by `medical Cost` desc;
+
+select * from medical_costs where region = 'southeast' 
+order by `medical Cost` desc;
+
+
+
+
+
+
+
+
