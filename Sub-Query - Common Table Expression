@@ -1,0 +1,55 @@
+# 2025 - 11 - 06 
+-- A Common Table Expression (CTE) in SQL is a named, temporary result set derived from a simple query, defined using the WITH clause. It exists only within the scope of a single SQL statement (e.g., SELECT, INSERT, UPDATE, or DELETE) and is not stored permanently in the database.
+
+select * from Customer;
+select * from Product1 ;
+select * from orders;
+
+-- fetch all orders for each customer who's salary is more than 35000
+select * from orders where c_id in(
+select id from customer where salary > 35000
+);
+
+-- Common table expression 
+
+WITH cte_name AS (
+    SELECT column1, column2, ...
+    FROM table_name
+    WHERE condition
+)
+SELECT *
+FROM cte_name;
+
+
+with CTE as ( 
+select id from customer where salary > 35000
+)
+
+select * from orders where c_id in(
+select id from CTE
+);
+
+-- Fetch customers records who's salary is more than tha average salary 
+
+select avg(salary) from customer;
+select * from customer where salary > (
+select avg(salary) from customer );
+
+-- duplicate records
+select c_id , count(c_id) 
+from orders group by c_id having count(*) > 1;
+
+-- Fetch all customer details which are store as duplicated. 
+select name, email, salary, phone 
+from customer where id in( 
+select c_id  
+from orders group by c_id having count(*) > 1
+);
+
+-- Common table expression 
+with duplicate_id as ( 
+select c_id  
+from orders group by c_id having count(*) > 1
+)
+select name, email, salary, phone 
+from customer where id in ( select * from duplicate_id );
