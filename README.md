@@ -304,4 +304,7 @@ Age is strictly greater than 18 and strictly less than 25.
 <img width="644" height="454" alt="union-interset-except" src="https://github.com/user-attachments/assets/5712da4c-e395-4eaf-9757-e453ee74f076" />
 <img width="263" height="191" alt="image" src="https://github.com/user-attachments/assets/ff3c6491-8e50-4433-8dd6-247fe4f68167" />
 
+# 2025 - 10 - 23 
+<img width="600" height="472" alt="inner-join-left-join-outer-join (1)" src="https://github.com/user-attachments/assets/00722017-ac69-4729-bc00-b4e1f8fd5e04" />
+
 
