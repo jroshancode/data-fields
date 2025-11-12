@@ -21,10 +21,24 @@ select * from booking order by new_fare desc limit 1 offset 1 ;
 -- first will be executed your inner or sub-query then Outer query or main query 
 
 # Find the Second Highest New Fare Booking Price . 
+select * from booking order by new_fare desc limit 1 offset 1;
+select distinct new_fare from booking order by new_fare desc limit 1 offset 1;
 select max(new_fare) from booking where new_fare < ( select max(new_fare) from booking );
 
+# Find the third Highest New Fare Booking Price . 
 select max(new_fare) from booking where new_fare < ( select max(new_fare) from booking 
 where new_fare < (select max(new_fare) from booking));
+
+-- Find Second highest medical charges  ;
+
+select distinct `medical Cost` from medical_costs order by `medical Cost` 
+desc limit 1 offset 1 ;
+
+select max(`medical Cost`) from medical_costs 
+where `medical Cost` < ( select max(`medical Cost`) from medical_costs );
+
+-- in 
+select * from employees where dept_id in(select dept_id from departments ) 
 
 --Find Second highest medical charges for each Region ;
 select * from medical_costs;
@@ -32,6 +46,31 @@ select * from medical_costs;
 select Region, max(`medical Cost`) from medical_costs 
 where `medical Cost`
 group by Region;
+
+
+select * from employees where exists(select dept_id from departments ) ;
+select * from employees where Dept_id in(select dept_id from departments ) ;
+
+select * from employees where exists(select dept_id from departments where 
+departments.dept_id =employees.dept_Id ) ;
+
+select * from employees where not exists(select dept_id from departments where 
+departments.dept_id =employees.dept_Id) ;
+
+-- Find all users who's id exitst in orders tables .
+SELECT *
+    FROM my_db.Users
+    WHERE EXISTS (SELECT * FROM my_db.Orders WHERE Users.UserID = Orders.userID);
+SELECT *
+    FROM my_db.Users
+    WHERE Not EXISTS (SELECT OrderID FROM my_db.Orders WHERE Users.UserID = Orders.userID);
+    
+    SELECT * FROM my_db.Users as c WHERE EXISTS (
+    SELECT 1 FROM my_db.Orders o
+    -- WHERE o.userid = c.userid 
+    );
+
+
 
 In SQL, ANY, ALL, and EXISTS are operators used primarily with subqueries to perform conditional filtering and comparisons.
 
@@ -72,6 +111,28 @@ Code
 2. EXISTS is used for checking the existence of rows returned by a subquery, without performing value-by-value comparisons.
 3. EXISTS is often more efficient than IN for checking existence, especially with large subquery results, as it stops processing once it finds the first matching row. 
 
+-- Returns Region whose medical cost price is greater than 
+-- at least one `medical cost` for the children '1' .
+ SELECT *
+    FROM medical_costs
+    WHERE `medical cost` > ANY 
+    (SELECT `medical cost` FROM medical_costs WHERE children = '1');
+
+
+-- Returns region whose `medical cost` price is greater than
+-- all medical charges prices for smoker is yes.
+ SELECT *
+    FROM medical_costs
+    WHERE `medical cost` > ALL 
+    (SELECT `medical cost` FROM medical_costs WHERE smoker = 'yes');
+    
+-- Returns region whose `medical cost` price is greater than
+-- all medical charges prices for smoker is no and gender is famale.
+ SELECT *
+    FROM medical_costs
+    WHERE `medical cost` > ALL 
+    (SELECT `medical cost` FROM medical_costs WHERE smoker = 'no' and gender='female');
+
 
 
 select Region, max(`medical Cost`) from medical_costs 
@@ -89,6 +150,7 @@ order by `medical Cost` desc;
 
 select * from medical_costs where region = 'southeast' 
 order by `medical Cost` desc;
+
 
 
 
