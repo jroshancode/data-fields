@@ -307,4 +307,75 @@ Age is strictly greater than 18 and strictly less than 25.
 # 2025 - 10 - 23 
 <img width="600" height="472" alt="inner-join-left-join-outer-join (1)" src="https://github.com/user-attachments/assets/00722017-ac69-4729-bc00-b4e1f8fd5e04" />
 
+# 2025 - 11 - 13
+🧍‍♂️ Customers Table
+customer_id    name    email    city
+1    Alice    alice@example.com    New York
+2    Bob    bob@example.com    Chicago
+3    Charlie    charlie@xyz.com    San Diego
+4    Diana    diana@abc.com    Boston
+5    Evan    evan@domain.com    Austin
+
+CREATE TABLE Customers (
+    Customer_id INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Email VARCHAR(50),
+    City VARCHAR(30)
+);
+
+truncate Customers
+INSERT INTO Customers (Customer_id, Name, Email, City)
+VALUES(1, 'Alice', 'alice@example.com', 'New York'),
+(2, 'Bob', 'bob@example.com', 'Chicago'),
+(3, 'Charlie', 'charlie@xyz.com', 'San Diego'),
+(4, 'Diana', 'diana@abc.com', 'Boston'),
+(5, 'Evan', 'evan@domain.com', 'Austin');
+
+📦 Products Table
+product_id    product_name    price
+101    Wireless Mouse    25.99
+102    USB-C Cable    9.99
+103    Mechanical Keyboard    89.99
+104    Monitor 24"    149.99
+105    Laptop Stand    29.99
+
+-- Create Products Table
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY,
+    product_name VARCHAR(100),
+    price DECIMAL(10, 2)
+);
+
+-- Insert Values into Products
+INSERT INTO Products (product_id, product_name, price) VALUES
+(101, 'Wireless Mouse', 25.99),
+(102, 'USB-C Cable', 9.99),
+(103, 'Mechanical Keyboard', 89.99),
+(104, 'Monitor 24"', 149.99),
+(105, 'Laptop Stand', 29.99);
+
+
+🧾 Orders Table
+order_id    customer_id    product_id    quantity    order_date
+1001    1    101    2    2024-12-01
+1002    2    103    1    2024-12-03
+1003    1    102    3    2024-12-05
+1004    3    104    1    2024-12-06
+1005    5    105    2    2024-12-07
+
+create table if not exists Orders (
+order_id int primary key,
+customer_id varchar(30),
+product_id varchar(30),
+quantity int,
+order_date datetime
+)
+
+insert into Orders(order_id,customer_id,product_id,quantity,order_date)
+values(1001,1,101,2,'2024-12-01'),
+(1002,2,103,1,'2024-12-03'),
+(1003,1,102,3,'2024-12-05'),
+(1004,3,104,1,'2024-12-06'),
+(1005,5,105,2,'2024-12-07')
+
 
