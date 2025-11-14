@@ -4,9 +4,12 @@ use my_db;
  
 --  drop table healthcare;
  select * from healthcare;
+ alter table healthcare drop column new_requesting_date;
+alter table healthcare drop column new_appointment_date;
  
  select * from train;
- 
+alter table train drop column new_order_date;
+alter table train drop column new_ship_date;
  
  
  select * from train;
@@ -14,11 +17,12 @@ use my_db;
 -- alter table train modify column `Order Date` datetime;
 describe train;
 
+-- fetch all transaction records for order date 2017 
 select * from train where `Order Date` = '8/11/2017';
-
 select * from train where `Order Date` = '2017';
-
 select * from train where `Order Date` like '%2017%';
+
+select * from train where `Order Date`like '%11%'; -- month wise 
 
 -- 
 select now(), curdate(),current_date(),current_time(),curtime(),current_timestamp();
@@ -27,14 +31,6 @@ select now(), curdate(),current_date(),current_time(),curtime(),current_timestam
 select * ,year(`Requesting date`),month(`Requesting date`),day(`Requesting date`) from healthcare;
 
 select * from train where year(`Order Date`) = '2017';
-
--- Get the records for specific year or month or day
-select new_order_date,year(new_order_date),month(new_order_date),day(new_order_date) from train 
-where year(new_order_date) = 2016;
-
-select new_order_date, dayofweek(new_order_date) , dayofyear(new_order_date) , hour(new_order_date),
-minute(new_order_date),second(new_order_date) , week(new_order_date),weekday(new_order_date), 
-quarter(new_order_date) from train;
 
 select dayofyear(now());
 
@@ -45,7 +41,8 @@ STR_TO_DATE(str, format)	Convert string to date	SELECT STR_TO_DATE('24-04-2025',
 TIME_FORMAT(time, format)	Format time	SELECT TIME_FORMAT('15:30:45', '%H:%i');	15:30 <br>
 EXTRACT(unit FROM date)	Extract date part	SELECT EXTRACT(YEAR FROM '2025-04-24');	2025  <br>
 
-SELECT now(),DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'),DATE_FORMAT(NOW(), '%y-%m-%d %h:%i:%s');
+SELECT now(),DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'),DATE_FORMAT(NOW(), '%y-%m-%d %h:%i:%s'),
+DATE_FORMAT(NOW(), '%Y-%M-%W %h:%i:%s');
 -- Get only the time part (HH:MM:SS) from the created_at column in the logs table.
 
 %M -> month name 
@@ -67,58 +64,88 @@ select now(),date_format(now(),"%H:%i:%s") , date_format(now(),"%H:%I:%S")
 
 
 -- -- Date format 
-select new_order_date, date_format(new_order_date,"%Y-%m-%d"),date_format(new_order_date,"%h-%i-%s %p"), date_format(new_order_date,"%W-%M-%Y"),
-date_format(new_order_date,"%d-%m-%Y")
-from train;
-
 select `Appointment date`, date_format(`Appointment date`,"%Y-%m-%d"),date_format(`Appointment date`,"%h-%i-%s %p"), date_format(`Appointment date`,"%W-%M-%Y"),
 date_format(`Appointment date`,"%d-%m-%Y")
 from healthcare;
 
+
 -- Str to date 
-
-
-
-use sql_course;
-select * from healthcare;
-select * from train;
-
 
 select `Order Date`, str_to_date(`Order Date`,"%d/%m/%Y")
 from train;
 
+alter table train modify `Order Date` datetime ;
 alter table train add column new_order_date datetime;
 update train set new_order_date = str_to_date(`Order Date`,"%d/%m/%Y");
-
-
 
 select `Ship Date`, str_to_date(`Ship Date`,"%d/%m/%Y") from train;
 
 alter table train add column new_ship_date datetime;
 update train set new_ship_date = str_to_date(`Ship Date`,"%d/%m/%Y");
 
+select * from train;
 
+select new_order_date, date_format(new_order_date,"%Y-%m-%d"),date_format(new_order_date,"%h-%i-%s %p"), date_format(new_order_date,"%W-%M-%Y"),
+date_format(new_order_date,"%d-%m-%Y")
+from train;
+
+-- Get the records for specific year or month or day
+select new_order_date,year(new_order_date),month(new_order_date),day(new_order_date) from train 
+where year(new_order_date) = 2016;
+
+select new_order_date, dayofweek(new_order_date) , dayofyear(new_order_date) , hour(new_order_date),
+minute(new_order_date),second(new_order_date) , week(new_order_date),weekday(new_order_date), 
+quarter(new_order_date) from train;
+
+
+-- find total number of records for each year and months
+select  year(new_order_date) year, month(new_order_date) month, count(*) 
+from train  group  by year(new_order_date) , month(new_order_date) 
+order by year(new_order_date) desc , month(new_order_date) desc;
+
+-- with CTE
+select * , count(*) from
+(
+select  year(new_order_date) year, month(new_order_date) month
+from train  
+) as t 
+group  by year , month
+order by year desc , month desc;
+
+-- find sum of sales , average of sales for each quarter of order date 
+select * from train limit 5;
+select quarter(new_order_date) , sum(sales) , avg(sales) 
+from train group by quarter(new_order_date);
+
+-- Date_formate 
 select `Ship Date`,date_format(`Ship Date`,"%W-%M-%Y"),date_format(`Ship Date`,"%y-%M-%D") ,
 date_format(`Ship Date`,"%Y-%m-%d %h-%i-%s %p") from train;
 
 
 select * from healthcare;
 
-select `Requesting date` , str_to_date(`Requesting date`,"%m/%d/%y %h:%i%p") 
+select `Requesting date` , str_to_date(`Requesting date`,"%m/%d/%y %h:%i %p") 
 from healthcare;
 
 select `Appointment date` , str_to_date(`Appointment date`,"%m/%d/%Y %h:%i%p") 
 from healthcare;
 
+alter table healthcare add column new_requesting_date datetime;
+alter table healthcare add column new_appointment_date datetime;
 describe healthcare;
-update healthcare set `Requesting date` = str_to_date(`Requesting date`,"%m/%d/%Y %h:%i%p") ;
-
+update healthcare set new_requesting_date = str_to_date(`Requesting date`,"%m/%d/%Y %h:%i%p") ;
 alter table healthcare modify `Appointment date` datetime;
 
 -- update healthcare set `Appointment date` = str_to_date(`Appointment date`,"%d/%m/%Y");
  
 UPDATE healthcare 
-SET `Appointment date` = STR_TO_DATE(`Appointment date`, '%m/%d/%y %h:%i %p');
+SET new_appointment_date = STR_TO_DATE(`Appointment date`, '%m/%d/%y %h:%i %p');
 
 UPDATE healthcare 
 SET `Appointment date` = STR_TO_DATE(`Appointment date`, "%c/%e/%y %r"); 
+
+-- date_format
+select * from healthcare;
+    
+-- find all healthcare reports for each requsting date and appointment date should be equal ?
+
