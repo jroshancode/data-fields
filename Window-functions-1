@@ -1,15 +1,57 @@
 # 2025 - 11 - 14 
 
+use my_db;
+
+select * from train;
+
+-- fetch top 7 days of order date records for each category ?
+-- fetch top 7 highest sales by order date for each category ?
+
+select category, new_order_date , `Order Date`, 
+row_number() over(partition by category order by new_order_date desc) as r_n,
+rank() over(partition by category order by new_order_date desc) as rn,
+dense_rank() over(partition by category order by new_order_date desc) as d_rank
+from train;
+
+select category, new_order_date , `Order Date`, sales,
+row_number() over(partition by category order by sales desc,new_order_date asc) as r_n,
+rank() over(partition by category order by sales desc,new_order_date asc) as rn,
+dense_rank() over(partition by category order by sales desc,new_order_date asc) as d_rank
+from train;
+
+
+-- Aggregation function ( min,max,avg , sum , count ) 
+
 select * from train;
 -- max , min ,avg, count,sum
+
+-- Fetch Top 7 days of order date total sales amount for each category  ? 
+select sales,category , new_order_date , new_ship_date, 
+sum(sales) over(partition by category order by new_order_date desc,sales asc ) as total_amount ,
+dense_rank() over(partition by category order by new_order_date desc ,sales asc)as rn
+from train; 
+
+-- select (731.94 + 81.424)/2 
+
 -- Fetch Top 7 days total sales for each Categories
 -- Running Total ( Cumulative Sum or Avg ) 
-with CTE as ( 
+
+-- select `Ship Date`,`Ship Mode`,Segment,Region, Category, `Sub-Category`, Sales, new_order_date,
+-- sum(Sales) over(partition by Category order by new_order_date desc) as total_sales,
+-- avg(Sales) over(partition by Category order by new_order_date desc) as average_sales,
+-- row_number()over(partition by Category order by new_order_date desc) as row_num,
+-- dense_rank()over(partition by Category order by new_order_date desc) as d_rank
+-- from train;
+
+select * from  ( 
 select `Ship Date`,`Ship Mode`,Segment,Region, Category, `Sub-Category`, Sales, 
-sum(Sales) over(partition by Category order by Sales       ) as total_sales,
-row_number()over(partition by Category order by Sales ) as row_num
-from train ) 
-select * from CTE where row_num<= 7 ;
+sum(Sales) over(partition by Category order by Sales) as total_sales,
+avg(Sales) over(partition by Category order by Sales) as average_sales,
+row_number()over(partition by Category order by Sales) as row_num,
+dense_rank()over(partition by Category order by Sales) as d_rank
+from train ) as t
+where row_num<= 7 ;
+
 
 
 select `Ship Date`,`Ship Mode`,Segment,Region, Category, `Sub-Category`, Sales, 
@@ -22,7 +64,6 @@ row_number()over(partition by Category order by Sales ) as row_num
 from train ;
 
 
-
 select Category, `Sub-Category`,`Ship Mode`,Segment , Region,sales, 
 ntile(3) over(order by sales ) as n_tile 
 from train;
@@ -32,15 +73,17 @@ ntile(3) over(partition by `Ship Mode` order by sales ) as n_tile
 from train;
 
 
+
+
 -- lag( first record will be zero )  and lead ( last recod will be zero 
 
-select concat(FirstName , " ", LastName) as full_name , 
-StartDate , ExitDate , Supervisor , EmployeeType , MaritalDesc,
-lag(StartDate,1) over(order by StartDate) as pre_date ,
-lag(StartDate,3) over(order by StartDate) as pre_third,
-lead(StartDate,1) over(order by StartDate) as next_date ,
-lead(StartDate,2) over(order by StartDate) as next_second
-from Employee_data;
+select category, new_order_date , `Order Date`, sales ,
+
+lag(new_order_date,1) over(order by new_order_date) as pre_date ,
+lag(new_order_date,3) over(order by new_order_date) as pre_third,
+lead(new_order_date,1) over(order by new_order_date) as next_date ,
+lead(new_order_date,2) over(order by new_order_date) as next_second
+from train;
 
 select Category, `Sub-Category`,`Ship Mode`,Segment , Region,sales, 
 lag(sales,3) over(partition by `Ship Mode` order by sales ) as prev_three,
