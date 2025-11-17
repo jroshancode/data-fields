@@ -149,3 +149,109 @@ select * from healthcare;
     
 -- find all healthcare reports for each requsting date and appointment date should be equal ?
 
+
+
+# 2025 - 11 - 17 
+
+use my_db;
+
+select * from train;
+select * from healthcare;
+
+-- find all healtcare reports for same date of `Requesting date` = `Appointment date`
+select * from healthcare where `Requesting date` = `Appointment date`;
+select * from healthcare 
+-- where new_requesting_date = new_appointment_date
+order by new_requesting_date,new_appointment_date;
+
+select * from healthcare where day(`Requesting date`) = day(`Appointment date`);
+select * from healthcare where day(new_requesting_date) = day(new_appointment_date);
+
+select * from healthcare where date_format(`Requesting date`,"%Y-%m-%d") = date_format(`Appointment date`,"%Y-%m-%d");
+select * from healthcare where date_format(new_requesting_date,"%Y-%m-%d") = date_format(new_appointment_date,"%Y-%m-%d");
+
+-- date_add ,adddate , date_sub, subdate 
+-- for 1 day 
+select * , date_add(new_requesting_date,interval 1 day)  from healthcare 
+where date_add(new_requesting_date,interval 1 day)  = new_appointment_date;
+
+select * , date_add(new_requesting_date,interval 1 day)  from healthcare 
+where date_format(date_add(new_requesting_date,interval 1 day),"%Y-%m-%d")  = date_format(new_appointment_date,"%Y-%m-%d");
+
+
+-- for 2 day 
+select * , date_add(`Requesting date`,interval 2 day)  from healthcare 
+where date_format(date_add(new_requesting_date,interval 2 day),"%Y-%m-%d")  = date_format(new_appointment_date,"%Y-%m-%d");
+
+-- for 1 months 
+select * , date_add(new_requesting_date,interval 1 month)  from healthcare 
+where date_format(date_add(new_requesting_date,interval 1 month),"%Y-%m-%d")  = date_format(new_appointment_date,"%Y-%m-%d");
+
+select * , date_add(`Requesting date`,interval 1 month)  from healthcare 
+where month(date_add(`Requesting date`,interval 1 month))  = month(`Appointment date`);
+
+
+-- Comparing order date with ship date for 1 days
+select * from train;
+
+select *, date_add(new_order_date,interval 1 day) from train 
+where new_order_date = subdate(new_ship_date,interval 1 day);
+
+-- Comparing order date with ship date for 2 days
+select *, date_add(new_order_date,interval 1 day) from train 
+where new_order_date = subdate(new_ship_date,interval 2 day);
+
+
+-- difference between 
+select datediff(now(),'2025-11-15');
+select * from train where datediff(new_ship_date,new_order_date) = 2;
+
+select * , datediff(now(), date_sub(now(),interval 7 day));
+select *,datediff(new_ship_date, date_sub(new_order_date,interval 7 day))
+from train where datediff(new_ship_date, date_sub(new_order_date,interval 7 day))= 7 ;
+
+select `Order Date`,`Ship Date`,datediff(new_ship_date,new_order_date) as diff 
+from train ;
+
+-- Get all ship date from past three order date 
+with etc as ( 
+select `Order Date`,`Ship Date`,datediff(new_ship_date,new_order_date) as diff 
+from train ) 
+select * from etc where diff <=3;
+
+select timediff(now(),'2025-04-24'); -- null 
+select timediff(current_time(),'11:38:00 am'), timediff(curtime(),'4:32:00 pm');
+
+
+select `Order Date`,`Ship Date`,timediff(date_format(`Ship Date`,"%h-%i-%s"),
+date_format(`Order Date`,"%h-%i-%s") )as diff 
+from train ;
+
+-- extract 
+select extract(year from '2025-6-01'),extract(month from '2025-6-01'), extract(day from '2025-6-01'),
+extract(hour from '2025-6-01'), extract(minute from '2025-6-01') , extract(second from '2025-6-01');
+
+select extract(hour from `Requesting date`) , extract(minute from `Requesting date`), extract(second from `Requesting date`)
+from healthcare;
+
+
+select * from healthcare;
+
+select * , datediff(now(),`Requesting date`) ,datediff(now(),`Appointment date`)
+from healthcare;
+
+select * , timediff(now(),`Requesting date`) ,timediff(now(),`Appointment date`)
+from healthcare;
+
+-- 3️⃣   Exact difference in seconds, minutes, or hours
+select 
+ TIMESTAMPDIFF(year, `Requesting date`, `Appointment date`) AS years,
+  TIMESTAMPDIFF(month, `Requesting date`, `Appointment date`) AS months,
+ TIMESTAMPDIFF(DAY, `Requesting date`, `Appointment date`) AS days,
+  TIMESTAMPDIFF(HOUR, `Requesting date`, `Appointment date`) AS hours,
+  TIMESTAMPDIFF(MINUTE, `Requesting date`, `Appointment date`) AS minutes,
+  TIMESTAMPDIFF(SECOND, `Requesting date`, `Appointment date`) AS seconds
+  from healthcare;
+  
+  
+
