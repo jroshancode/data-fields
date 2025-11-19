@@ -20,13 +20,15 @@ COMMIT: This command saves all changes made during the current transaction perma
 -- 1️ COMMIT
 -- Saves all changes permanently in the database.
 
+-- 1️ COMMIT
+-- Saves all changes permanently in the database.
+begin;
 UPDATE emp 
-SET salary = salary + 200 
-WHERE emp_id = 5;
+SET salary = salary + 200 -- 90200
+WHERE emp_id = 4;
 -- UPDATE accounts 
 -- SET balance = balance + 500 
 -- WHERE account_id = 102;
-
 COMMIT;
 
 -- ROLLBACK: This command undoes all changes made during the current transaction since the last COMMIT or SAVEPOINT. 
@@ -34,12 +36,14 @@ It restores the database to its state before the transaction began or to a speci
 
 -- 2 ROLLBACK
 
+begin;
 -- Undo all changes since the last COMMIT.
 UPDATE emp 
-SET salary = salary + 200 
+SET salary = salary + 200 -- 79400
 WHERE emp_id = 6;
 -- DELETE FROM emp  WHERE id = 50;
-ROLLBACK;
+ROLLBACK; -- be-default all transaction will be undo.
+commit;
 
 
 -- 3️ SAVEPOINT
@@ -47,28 +51,47 @@ ROLLBACK;
 
 -- SAVEPOINT: This command sets a named point within a transaction to which you can later roll back. This allows for partial rollbacks within a larger transaction.
 
+select * from emp;
+-- Example:- 1
 BEGIN;
+savepoint t1;
+UPDATE emp SET salary = salary + 2000 WHERE emp_id = 1; -- 77000
 
-UPDATE emp SET salary = salary + 2000 WHERE emp_id = 1;
-SAVEPOINT t1;
-
-UPDATE emp SET salary = salary + 3000 WHERE emp_id = 2;
 SAVEPOINT t2;
+UPDATE emp SET salary = salary + 3000 WHERE emp_id = 2; -- 63000
 
-UPDATE emp SET salary = salary + 5000 WHERE emp_id = 5;
+SAVEPOINT t3;
+UPDATE emp SET salary = salary + 5000 WHERE emp_id = 4; -- 90400
+
+-- undo only last update
+ROLLBACK TO t1;
+COMMIT;
+-- No any changed occur in the database table.
+
+-- Example:- 2 
+BEGIN;
+savepoint t1;
+UPDATE emp SET salary = salary + 2000 WHERE emp_id = 1; -- 77000
+
+SAVEPOINT t2;
+UPDATE emp SET salary = salary + 3000 WHERE emp_id = 2; -- 63000
+
+SAVEPOINT t3;
+UPDATE emp SET salary = salary + 5000 WHERE emp_id = 4; -- 90400
 
 -- undo only last update
 ROLLBACK TO t2;
-
 COMMIT;
+-- Only emp_id 1 is updated and other emp_id 2 and 4 will not changed permanentily in the database table. 
+
 
 -- delete 
- -- for Delete , insert and Update 
+ -- For Delete , insert and Update 
 begin; 
 savepoint t1;
 delete from emp where emp_id = 5;
 savepoint t2;
-UPDATE emp SET salary = salary + 5000 WHERE emp_id = 3; -- 82000
+UPDATE emp SET salary = salary + 5000 WHERE emp_id = 3; -- 87000
 
 savepoint t3;
 delete from emp where emp_id = 3;
@@ -79,9 +102,10 @@ delete from emp where emp_id = 7;
 rollback to t3;
 commit;
 
--- '7', 'Vivek Patel', 'Finance', '65000', '2019-05-30', 'vivek_patel@company.com', '4'
-
 select * from emp;
+
+insert into emp() 
+values('5', 'abcpqrlmn', 'Banking', '65000', '2019-05-30', 'vivek_patel@company.com', '4');
 
 
 
